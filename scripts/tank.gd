@@ -4,10 +4,10 @@ signal health_changed
 signal dead
 
 @export var Bullet:PackedScene
-@export var speed:int
-@export var rotation_speed:float
-@export var gun_cooldown:float
-@export var health:int
+@export var speed = 400
+@export var rotation_speed = 2.0
+@export var gun_cooldown = 2.0
+@export var health = 500
 
 var can_shoot = true
 var alive = true

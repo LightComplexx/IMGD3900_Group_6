@@ -1,5 +1,4 @@
-extends "res://tank.gd"
-
+extends "res://scripts/tank.gd"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -11,9 +10,9 @@ func _process(delta: float) -> void:
 	pass
 
 func control(delta):
-	$Turret.look_at(get_global_mouse_position())
-	
 	var rot_dir = 0
+	
+	$Turret.look_at(get_global_mouse_position())
 	
 	if Input.is_action_pressed("turn_right"):
 		rot_dir += 1
