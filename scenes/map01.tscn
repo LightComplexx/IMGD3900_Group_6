@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://ddi0dykphdkwa"]
+[gd_scene load_steps=8 format=4 uid="uid://ddi0dykphdkwa"]
 
 [ext_resource type="Texture2D" uid="uid://ch5k0sr2j1x3h" path="res://sprites/terrainTiles_retina.png" id="1_71ulq"]
 [ext_resource type="Script" path="res://scripts/map.gd" id="1_qp81q"]
 [ext_resource type="PackedScene" uid="uid://ou754ipyqey5" path="res://scenes/player.tscn" id="2_7y8qd"]
+[ext_resource type="PackedScene" uid="uid://bk06uui08myjf" path="res://scenes/enemy.tscn" id="4_pteym"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1brsq"]
 texture = ExtResource("1_71ulq")
@@ -230,6 +231,12 @@ terrain_set_1/terrain_3/name = "d_curve"
 terrain_set_1/terrain_3/color = Color(0.375, 0.5, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_1brsq")
 
+[sub_resource type="Curve2D" id="Curve2D_lhdwn"]
+_data = {
+"points": PackedVector2Array(-45.7244, 0.310257, 45.7244, -0.310257, 1408, 320, -70.4912, -0.118523, 70.4912, 0.118523, 2696, 320, 0.154293, -29.4987, -0.154293, 29.4987, 2752, 384, 0, -4.23785, 0, 4.23785, 2752, 640, 64.6273, -1.80395, -64.6273, 1.80395, 2688, 704, 59.0311, -0.828286, -59.0311, 0.828286, 1408, 704, 0.943874, 50.0253, -0.943874, -50.0253, 1344, 640, 1.419, 63.9417, -1.419, -63.9417, 1344, 384, -2.41758, 0.105112, 2.41758, -0.105112, 1408, 320)
+}
+point_count = 9
+
 [node name="Map01" type="Node2D"]
 script = ExtResource("1_qp81q")
 
@@ -242,3 +249,15 @@ tile_map_data = PackedByteArray("AAAAAAIAAAADAAEAAAABAAIAAAACAAAAAAACAAIAAAACAAA
 tile_set = SubResource("TileSet_dxmbk")
 
 [node name="Player" parent="." instance=ExtResource("2_7y8qd")]
+position = Vector2(384, 256)
+
+[node name="Paths" type="Node2D" parent="."]
+
+[node name="Path2D" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_lhdwn")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Paths/Path2D"]
+position = Vector2(1408, 320)
+rotation = -0.00678494
+
+[node name="Enemy" parent="Paths/Path2D/PathFollow2D" instance=ExtResource("4_pteym")]

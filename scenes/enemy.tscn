@@ -9,7 +9,6 @@
 size = Vector2(80, 84)
 
 [node name="Enemy" instance=ExtResource("1_rx8kj")]
-position = Vector2(601, 317)
 script = ExtResource("2_k23wa")
 metadata/_edit_group_ = true
 
