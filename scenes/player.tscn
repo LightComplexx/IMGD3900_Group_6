@@ -10,20 +10,26 @@ size = Vector2(256, 129)
 
 [node name="Player" instance=ExtResource("1_4dx5d")]
 position = Vector2(334, 233)
+scale = Vector2(0.5, 0.5)
 script = ExtResource("2_aukck")
+speed = 350
+rotation_speed = 2.0
 metadata/_edit_group_ = true
 
 [node name="TankBody" parent="." index="0"]
 texture = ExtResource("3_c3wpl")
 
 [node name="Turret" parent="." index="1"]
-position = Vector2(15, 0)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_2a1k5")
+offset = Vector2(15, 0)
 
 [node name="Muzzle" parent="Turret" index="0"]
-position = Vector2(80, 0)
+position = Vector2(150, 0)
 
 [node name="CollisionShape2D" parent="." index="2"]
 position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_7tvcd")
+
+[node name="Camera2D" type="Camera2D" parent="." index="4"]
+zoom = Vector2(1.4, 1.4)
