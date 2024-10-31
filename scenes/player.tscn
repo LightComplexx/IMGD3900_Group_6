@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b2f2t1hve371p" path="res://sprites/gunonly_pixel.png" id="4_2a1k5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7tvcd"]
-size = Vector2(80, 84)
+size = Vector2(256, 129)
 
 [node name="Player" instance=ExtResource("1_4dx5d")]
 position = Vector2(334, 233)
@@ -25,5 +25,5 @@ texture = ExtResource("4_2a1k5")
 position = Vector2(80, 0)
 
 [node name="CollisionShape2D" parent="." index="2"]
-visible = false
+position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_7tvcd")
