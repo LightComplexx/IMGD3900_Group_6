@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bk06uui08myjf"]
+[gd_scene load_steps=7 format=3 uid="uid://bk06uui08myjf"]
 
 [ext_resource type="PackedScene" uid="uid://bgaadtx5bln0a" path="res://scenes/tank.tscn" id="1_rx8kj"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="2_k23wa"]
@@ -8,8 +8,13 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ltni6"]
 size = Vector2(80, 84)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_p5c8d"]
+radius = 300.0
+
 [node name="Enemy" instance=ExtResource("1_rx8kj")]
 script = ExtResource("2_k23wa")
+turret_speed = 1.0
+detect_radius = 200
 metadata/_edit_group_ = true
 
 [node name="TankBody" parent="." index="0"]
@@ -24,3 +29,11 @@ position = Vector2(60, 0)
 
 [node name="CollisionShape2D" parent="." index="2"]
 shape = SubResource("RectangleShape2D_ltni6")
+
+[node name="DetectRadius" type="Area2D" parent="." index="4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRadius" index="0"]
+shape = SubResource("CircleShape2D_p5c8d")
+
+[connection signal="body_entered" from="DetectRadius" to="." method="_on_detect_radius_body_entered"]
+[connection signal="body_exited" from="DetectRadius" to="." method="_on_detect_radius_body_exited"]
