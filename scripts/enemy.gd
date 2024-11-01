@@ -18,20 +18,21 @@ func _process(delta) -> void:
 		var target_dir = (target.global_position - global_position).normalized()
 		$Turret.global_rotation = current_dir.lerp(target_dir, turret_speed * delta).angle()
 	else:
-		$Turret.global_rotation = global_rotation - (turret_speed * delta)
+		$Turret.global_rotation = lerp_angle($Turret.global_rotation, global_rotation, turret_speed * delta)
+		if abs($Turret.global_rotation) < 0.01:
+			$Turret.global_rotation = global_rotation
 
 
-func control(delta):
+func control(_delta):
 	if parent is PathFollow2D:
-		parent.set_progress(parent.get_progress() + speed * delta)
+		parent.set_progress(parent.get_progress() + speed * _delta)
 		position = Vector2()
 	else:
 		pass
 
 
 func _on_detect_radius_body_entered(body: Node2D) -> void:
-	if body.name == "Player":
-		target = body
+	target = body
 
 
 func _on_detect_radius_body_exited(body: Node2D) -> void:

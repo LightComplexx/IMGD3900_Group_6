@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ou754ipyqey5"]
+[gd_scene load_steps=7 format=3 uid="uid://ou754ipyqey5"]
 
 [ext_resource type="PackedScene" uid="uid://bgaadtx5bln0a" path="res://scenes/tank.tscn" id="1_4dx5d"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_aukck"]
+[ext_resource type="PackedScene" uid="uid://djksdfmbjrl5e" path="res://scenes/player_bullet.tscn" id="3_48vc0"]
 [ext_resource type="Texture2D" uid="uid://c4ucoxx7s0hog" path="res://sprites/tankonly_pixel.png" id="3_c3wpl"]
 [ext_resource type="Texture2D" uid="uid://b2f2t1hve371p" path="res://sprites/gunonly_pixel.png" id="4_2a1k5"]
 
@@ -11,7 +12,10 @@ size = Vector2(256, 129)
 [node name="Player" instance=ExtResource("1_4dx5d")]
 position = Vector2(334, 233)
 scale = Vector2(0.5, 0.5)
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("2_aukck")
+Bullet = ExtResource("3_48vc0")
 speed = 350
 rotation_speed = 2.0
 metadata/_edit_group_ = true
@@ -32,4 +36,3 @@ position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_7tvcd")
 
 [node name="Camera2D" type="Camera2D" parent="." index="4"]
-zoom = Vector2(1.4, 1.4)

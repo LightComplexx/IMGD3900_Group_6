@@ -1,8 +1,8 @@
 extends Area2D
 
-@export var speed = 400
-@export var damage = 50
-@export var lifetime = 2.0
+@export var speed = 750
+@export var damage = 10
+@export var lifetime = 0.5
 
 var velocity = Vector2()
 
@@ -11,6 +11,7 @@ func start(pos: Vector2, dir: Vector2):
 	rotation = dir.angle()
 	$Lifetime.wait_time = lifetime
 	velocity = dir * speed
+	$Lifetime.start()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

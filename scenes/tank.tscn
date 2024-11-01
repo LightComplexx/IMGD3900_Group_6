@@ -14,3 +14,5 @@ script = ExtResource("1_hiiss")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 [node name="GunTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="GunTimer" to="." method="_on_gun_timer_timeout"]

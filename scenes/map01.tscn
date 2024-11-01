@@ -249,7 +249,7 @@ tile_map_data = PackedByteArray("AAAAAAIAAAADAAEAAAABAAIAAAACAAAAAAACAAIAAAACAAA
 tile_set = SubResource("TileSet_dxmbk")
 
 [node name="Player" parent="." instance=ExtResource("2_7y8qd")]
-position = Vector2(1702, 502)
+position = Vector2(388, 262)
 
 [node name="Paths" type="Node2D" parent="."]
 
@@ -258,6 +258,8 @@ curve = SubResource("Curve2D_lhdwn")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Paths/Path2D"]
 position = Vector2(1408, 320)
-rotation = -0.00678494
+rotation = -0.0067856
 
 [node name="Enemy" parent="Paths/Path2D/PathFollow2D" instance=ExtResource("4_pteym")]
+
+[connection signal="shoot" from="Player" to="." method="_on_Tank_shoot"]
