@@ -1,4 +1,4 @@
-extends "res://scripts/tank.gd"
+extends "res://scripts/base_classes/tank.gd"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -18,8 +18,8 @@ func control(_delta):
 	velocity = Vector2()
 	
 	if Input.is_action_pressed("move_forward"):
-		velocity = Vector2(speed, 0).rotated(rotation)
+		velocity = Vector2(max_speed, 0).rotated(rotation)
 	if Input.is_action_pressed("move_backward"):
-		velocity = Vector2(-speed/2, 0).rotated(rotation)
+		velocity = Vector2(-max_speed/2, 0).rotated(rotation)
 	if Input.is_action_pressed("shoot"):
 		_on_shoot()
