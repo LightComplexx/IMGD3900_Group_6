@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4ucoxx7s0hog"
-path="res://.godot/imported/tankonly_pixel.png-ec8242b740af0d99a8287766636b40d3.ctex"
+uid="uid://bxs2hvfruhf01"
+path="res://.godot/imported/health_bar_yellow.png-6022a18a2f47d443b1fa367fce63fdb3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/tankonly_pixel.png"
-dest_files=["res://.godot/imported/tankonly_pixel.png-ec8242b740af0d99a8287766636b40d3.ctex"]
+source_file="res://sprites/ui/health_bar_yellow.png"
+dest_files=["res://.godot/imported/health_bar_yellow.png-6022a18a2f47d443b1fa367fce63fdb3.ctex"]
 
 [params]
 

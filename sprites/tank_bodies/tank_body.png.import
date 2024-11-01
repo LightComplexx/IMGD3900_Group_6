@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ch5k0sr2j1x3h"
-path="res://.godot/imported/terrainTiles_retina.png-f93ac43440cb5d649e3bb5ced24b6f44.ctex"
+uid="uid://cvgv4118atjjm"
+path="res://.godot/imported/tank_body.png-ab6c67c8f1736dad236a7ecf6806aa1f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/terrainTiles_retina.png"
-dest_files=["res://.godot/imported/terrainTiles_retina.png-f93ac43440cb5d649e3bb5ced24b6f44.ctex"]
+source_file="res://sprites/tank_bodies/tank_body.png"
+dest_files=["res://.godot/imported/tank_body.png-ab6c67c8f1736dad236a7ecf6806aa1f.ctex"]
 
 [params]
 

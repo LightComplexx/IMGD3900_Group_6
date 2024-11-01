@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkhyi70hexmag"
-path="res://.godot/imported/enemy_tank_turret.png-2d766951737843968a61f2941d05e0be.ctex"
+uid="uid://1wn0xeaergs0"
+path="res://.godot/imported/health_bar_clear.png-8f7ad21605b4d8209c3e0cdd8e60b57d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/enemy_tank_turret.png"
-dest_files=["res://.godot/imported/enemy_tank_turret.png-2d766951737843968a61f2941d05e0be.ctex"]
+source_file="res://sprites/ui/health_bar_clear.png"
+dest_files=["res://.godot/imported/health_bar_clear.png-8f7ad21605b4d8209c3e0cdd8e60b57d.ctex"]
 
 [params]
 

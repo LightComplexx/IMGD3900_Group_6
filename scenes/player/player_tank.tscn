@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://ou754ipyqey5"]
+
+[ext_resource type="PackedScene" uid="uid://bgaadtx5bln0a" path="res://scenes/base_classes/tank.tscn" id="1_4dx5d"]
+[ext_resource type="Script" path="res://scripts/player/player_tank.gd" id="2_06uea"]
+[ext_resource type="PackedScene" uid="uid://djksdfmbjrl5e" path="res://scenes/player/player_bullet.tscn" id="3_48vc0"]
+[ext_resource type="Texture2D" uid="uid://c4ucoxx7s0hog" path="res://sprites/tank_bodies/tankonly_pixel.png" id="3_c3wpl"]
+[ext_resource type="Texture2D" uid="uid://b2f2t1hve371p" path="res://sprites/tank_turrets/gunonly_pixel.png" id="4_2a1k5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7tvcd"]
+size = Vector2(256, 129)
+
+[node name="Player" instance=ExtResource("1_4dx5d")]
+position = Vector2(334, 233)
+scale = Vector2(0.5, 0.5)
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("2_06uea")
+Bullet = ExtResource("3_48vc0")
+rotation_speed = 2.0
+metadata/_edit_group_ = true
+
+[node name="TankBody" parent="." index="0"]
+texture = ExtResource("3_c3wpl")
+
+[node name="Turret" parent="." index="1"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_2a1k5")
+offset = Vector2(15, 0)
+
+[node name="Muzzle" parent="Turret" index="0"]
+position = Vector2(150, 0)
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_7tvcd")
+
+[node name="Camera2D" type="Camera2D" parent="." index="4"]
