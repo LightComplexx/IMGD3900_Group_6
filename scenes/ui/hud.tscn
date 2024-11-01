@@ -6,6 +6,21 @@
 [ext_resource type="Texture2D" uid="uid://cso0h5my7ewms" path="res://sprites/ui/health_bar_orange.png" id="4_7o8d0"]
 [ext_resource type="Texture2D" uid="uid://bxs2hvfruhf01" path="res://sprites/ui/health_bar_yellow.png" id="5_t5ujx"]
 
+[sub_resource type="Animation" id="Animation_yduuo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Margin/Container/HealthBar:texture_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_w0sag")]
+}
+
 [sub_resource type="Animation" id="Animation_w8uep"]
 resource_name = "healthbar_flash"
 length = 0.2
@@ -21,21 +36,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [ExtResource("4_7o8d0"), ExtResource("5_t5ujx"), ExtResource("4_7o8d0"), ExtResource("5_t5ujx"), ExtResource("4_7o8d0")]
-}
-
-[sub_resource type="Animation" id="Animation_yduuo"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Margin/Container/HealthBar:texture_progress")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_w0sag")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dpnj0"]
