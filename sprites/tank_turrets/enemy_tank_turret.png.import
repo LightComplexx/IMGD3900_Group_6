@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ch5k0sr2j1x3h"
-path="res://.godot/imported/terrainTiles_retina.png-f93ac43440cb5d649e3bb5ced24b6f44.ctex"
+uid="uid://bkhyi70hexmag"
+path="res://.godot/imported/enemy_tank_turret.png-4bf38a600d79d016b26ae0986b1d336a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/terrainTiles_retina.png"
-dest_files=["res://.godot/imported/terrainTiles_retina.png-f93ac43440cb5d649e3bb5ced24b6f44.ctex"]
+source_file="res://sprites/tank_turrets/enemy_tank_turret.png"
+dest_files=["res://.godot/imported/enemy_tank_turret.png-4bf38a600d79d016b26ae0986b1d336a.ctex"]
 
 [params]
 

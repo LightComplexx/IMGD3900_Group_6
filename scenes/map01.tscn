@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=4 uid="uid://ddi0dykphdkwa"]
 
-[ext_resource type="Texture2D" uid="uid://ch5k0sr2j1x3h" path="res://sprites/terrainTiles_retina.png" id="1_71ulq"]
+[ext_resource type="Texture2D" uid="uid://ch5k0sr2j1x3h" path="res://sprites/tilemaps/terrainTiles_retina.png" id="1_71ulq"]
 [ext_resource type="Script" path="res://scripts/map.gd" id="1_qp81q"]
 [ext_resource type="PackedScene" uid="uid://ou754ipyqey5" path="res://scenes/player.tscn" id="2_7y8qd"]
 [ext_resource type="PackedScene" uid="uid://bk06uui08myjf" path="res://scenes/enemy.tscn" id="4_pteym"]

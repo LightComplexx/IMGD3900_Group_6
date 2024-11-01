@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://bgaadtx5bln0a" path="res://scenes/tank.tscn" id="1_4dx5d"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_aukck"]
 [ext_resource type="PackedScene" uid="uid://djksdfmbjrl5e" path="res://scenes/player_bullet.tscn" id="3_48vc0"]
-[ext_resource type="Texture2D" uid="uid://c4ucoxx7s0hog" path="res://sprites/tankonly_pixel.png" id="3_c3wpl"]
-[ext_resource type="Texture2D" uid="uid://b2f2t1hve371p" path="res://sprites/gunonly_pixel.png" id="4_2a1k5"]
+[ext_resource type="Texture2D" uid="uid://c4ucoxx7s0hog" path="res://sprites/tank_bodies/tankonly_pixel.png" id="3_c3wpl"]
+[ext_resource type="Texture2D" uid="uid://b2f2t1hve371p" path="res://sprites/tank_turrets/gunonly_pixel.png" id="4_2a1k5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7tvcd"]
 size = Vector2(256, 129)
