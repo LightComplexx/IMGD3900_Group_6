@@ -1,13 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://bk06uui08myjf"]
+[gd_scene load_steps=8 format=3 uid="uid://bk06uui08myjf"]
 
 [ext_resource type="PackedScene" uid="uid://bgaadtx5bln0a" path="res://scenes/base_classes/tank.tscn" id="1_rx8kj"]
 [ext_resource type="Script" path="res://scripts/enemy/enemy_tank.gd" id="2_00rm4"]
-[ext_resource type="Texture2D" uid="uid://dqqhq656da0o2" path="res://sprites/tank_bodies/enemy_tank_body.png" id="3_h1gc8"]
-[ext_resource type="Texture2D" uid="uid://bkhyi70hexmag" path="res://sprites/tank_turrets/enemy_tank_turret.png" id="4_io0t7"]
+[ext_resource type="Texture2D" uid="uid://dfndceesq6kcx" path="res://sprites/tank_bodies/enemy_tank_body_2.png" id="3_h8jbx"]
+[ext_resource type="Texture2D" uid="uid://blx55e40qljvw" path="res://sprites/tank_bodies/enemy_tank_canon_2.png" id="4_lny0q"]
 [ext_resource type="PackedScene" uid="uid://bdgfouvkixk75" path="res://scenes/ui/enemy_display.tscn" id="5_8727m"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ltni6"]
-size = Vector2(80, 84)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_01k2h"]
+size = Vector2(143, 78)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ssgt2"]
+size = Vector2(2, 78)
 
 [node name="Enemy" instance=ExtResource("1_rx8kj")]
 collision_layer = 4
@@ -18,17 +21,26 @@ detect_radius = 400
 metadata/_edit_group_ = true
 
 [node name="TankBody" parent="." index="0"]
-texture = ExtResource("3_h1gc8")
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("3_h8jbx")
 
 [node name="Turret" parent="." index="1"]
-texture = ExtResource("4_io0t7")
-offset = Vector2(20, 0)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("4_lny0q")
+offset = Vector2(160, 20)
 
 [node name="Muzzle" parent="Turret" index="0"]
-position = Vector2(60, 0)
+position = Vector2(520, 20)
 
-[node name="CollisionShape2D" parent="." index="2"]
-shape = SubResource("RectangleShape2D_ltni6")
+[node name="body_collision" parent="." index="2"]
+position = Vector2(-1.5, 0)
+shape = SubResource("RectangleShape2D_01k2h")
+
+[node name="BulletDetect" parent="." index="3" groups=["Enemy"]]
+
+[node name="bullet_collision" parent="BulletDetect" index="0"]
+position = Vector2(72, 0)
+shape = SubResource("RectangleShape2D_ssgt2")
 
 [node name="DetectRadius" type="Area2D" parent="." index="4"]
 collision_layer = 4
@@ -37,12 +49,14 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRadius" index="0"]
 
 [node name="LookAhead1" type="RayCast2D" parent="." index="5"]
-position = Vector2(0, -30)
+position = Vector2(0, -28)
+rotation = -0.0872665
 target_position = Vector2(100, 0)
 collision_mask = 7
 
 [node name="LookAhead2" type="RayCast2D" parent="." index="6"]
 position = Vector2(0, 30)
+rotation = 0.0872665
 target_position = Vector2(100, 0)
 collision_mask = 7
 

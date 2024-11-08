@@ -7,7 +7,7 @@ func _process(_delta: float) -> void:
 func control(_delta):
 	var rot_dir = 0
 	
-	$Turret.look_at(get_global_mouse_position())
+	#$Turret.look_at(get_global_mouse_position())
 	
 	if Input.is_action_pressed("turn_right"):
 		rot_dir += 1

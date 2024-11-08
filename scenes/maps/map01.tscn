@@ -253,6 +253,7 @@ tile_set = SubResource("TileSet_dxmbk")
 [node name="Player" parent="." instance=ExtResource("3_q5le8")]
 position = Vector2(388, 262)
 max_speed = 300.0
+gun_cooldown = 0.1
 
 [node name="Paths" type="Node2D" parent="."]
 

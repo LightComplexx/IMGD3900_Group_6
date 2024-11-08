@@ -30,9 +30,10 @@ func explode():
 
 func _on_body_entered(body: Node2D) -> void:
 	explode()
-	if body.has_method("take_damage"):
-		body.take_damage(damage)
-
 
 func _on_lifetime_timeout() -> void:
+	explode()
+
+
+func _on_area_entered(area: Area2D) -> void:
 	explode()
