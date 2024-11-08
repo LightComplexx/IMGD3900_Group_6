@@ -11,7 +11,11 @@ script = ExtResource("1_hiiss")
 
 [node name="Muzzle" type="Marker2D" parent="Turret"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="body_collision" type="CollisionShape2D" parent="."]
+
+[node name="BulletDetect" type="Area2D" parent="."]
+
+[node name="bullet_collision" type="CollisionShape2D" parent="BulletDetect"]
 
 [node name="GunTimer" type="Timer" parent="."]
 
