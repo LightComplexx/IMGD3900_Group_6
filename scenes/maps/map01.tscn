@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://ddi0dykphdkwa"]
+[gd_scene load_steps=11 format=4 uid="uid://ddi0dykphdkwa"]
 
 [ext_resource type="Script" path="res://scripts/maps/map.gd" id="1_04v3r"]
 [ext_resource type="Texture2D" uid="uid://ch5k0sr2j1x3h" path="res://sprites/tilemaps/terrainTiles_retina.png" id="2_0pu27"]
@@ -233,6 +233,12 @@ terrain_set_1/terrain_3/name = "d_curve"
 terrain_set_1/terrain_3/color = Color(0.375, 0.5, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_1brsq")
 
+[sub_resource type="Curve2D" id="Curve2D_q4wqa"]
+_data = {
+"points": PackedVector2Array(-2.12132, 0.353553, 2.12132, -0.353553, 1024, 960, -47.2841, 0.657734, 47.2841, -0.657734, 1536, 960, -1.21875, -42.2908, 1.21875, 42.2908, 1600, 1024, -0.943874, -45.3491, 0.943874, 45.3491, 1600, 1280, 44.8441, -0.7937, -44.8441, 0.7937, 1536, 1344, 76.5801, -0.270206, -76.5801, 0.270206, 1024, 1344, 0.93114, 13.2721, -0.93114, -13.2721, 960, 1280, 1.67072, 63.1443, -1.67072, -63.1443, 960, 1024, -4.50781, 0.265165, 4.50781, -0.265165, 1024, 960)
+}
+point_count = 9
+
 [sub_resource type="Curve2D" id="Curve2D_lhdwn"]
 _data = {
 "points": PackedVector2Array(-45.7244, 0.310257, 45.7244, -0.310257, 1408, 320, -70.4912, -0.118523, 70.4912, 0.118523, 2696, 320, 0.154293, -29.4987, -0.154293, 29.4987, 2752, 384, 0, -4.23785, 0, 4.23785, 2752, 640, 64.6273, -1.80395, -64.6273, 1.80395, 2688, 704, 59.0311, -0.828286, -59.0311, 0.828286, 1408, 704, 0.943874, 50.0253, -0.943874, -50.0253, 1344, 640, 1.419, 63.9417, -1.419, -63.9417, 1344, 384, -2.41758, 0.105112, 2.41758, -0.105112, 1408, 320)
@@ -257,6 +263,19 @@ gun_cooldown = 0.2
 
 [node name="Paths" type="Node2D" parent="."]
 
+[node name="Path2D2" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_q4wqa")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Paths/Path2D2"]
+position = Vector2(1024, 960)
+rotation = -0.165158
+
+[node name="Enemy2" parent="Paths/Path2D2/PathFollow2D" instance=ExtResource("4_sxn56")]
+rotation = -0.0067856
+scale = Vector2(0.8, 0.8)
+Bullet = ExtResource("5_mmp0p")
+max_health = 50
+
 [node name="Path2D" type="Path2D" parent="Paths"]
 curve = SubResource("Curve2D_lhdwn")
 
@@ -265,6 +284,7 @@ position = Vector2(1408, 320)
 rotation = -0.0067856
 
 [node name="Enemy" parent="Paths/Path2D/PathFollow2D" instance=ExtResource("4_sxn56")]
+scale = Vector2(0.8, 0.8)
 Bullet = ExtResource("5_mmp0p")
 max_health = 50
 
@@ -272,4 +292,5 @@ max_health = 50
 
 [connection signal="health_changed" from="Player" to="HUD" method="update_healthbar"]
 [connection signal="shoot" from="Player" to="." method="_on_Tank_shoot"]
+[connection signal="shoot" from="Paths/Path2D2/PathFollow2D/Enemy2" to="." method="_on_Tank_shoot"]
 [connection signal="shoot" from="Paths/Path2D/PathFollow2D/Enemy" to="." method="_on_Tank_shoot"]
