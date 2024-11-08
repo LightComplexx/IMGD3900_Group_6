@@ -18,8 +18,16 @@ func control(_delta):
 	velocity = Vector2()
 	
 	if Input.is_action_pressed("move_forward"):
+		if not $MoveSound.playing:
+			$MoveSound.play()
 		velocity = Vector2(max_speed, 0).rotated(rotation)
 	if Input.is_action_pressed("move_backward"):
+		if not $MoveSound.playing:
+			$MoveSound.play()
 		velocity = Vector2(-max_speed/2, 0).rotated(rotation)
 	if Input.is_action_pressed("shoot"):
 		_on_shoot()
+		
+	if not Input.is_anything_pressed():
+		$MoveSound.stop()
+		$MoveSound.seek(0.0)

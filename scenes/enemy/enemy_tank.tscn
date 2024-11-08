@@ -18,6 +18,8 @@ collision_mask = 3
 script = ExtResource("2_00rm4")
 turret_speed = 2.0
 detect_radius = 400
+bullet_interval = 0.3
+gun_cooldown = 2.0
 metadata/_edit_group_ = true
 
 [node name="TankBody" parent="." index="0"]
@@ -62,6 +64,9 @@ collision_mask = 7
 
 [node name="EnemyDisplay" parent="." index="7" instance=ExtResource("5_8727m")]
 
+[node name="BulletIntervalTimer" type="Timer" parent="." index="9"]
+
 [connection signal="health_changed" from="." to="EnemyDisplay" method="update_healthbar"]
 [connection signal="body_entered" from="DetectRadius" to="." method="_on_detect_radius_body_entered"]
 [connection signal="body_exited" from="DetectRadius" to="." method="_on_detect_radius_body_exited"]
+[connection signal="timeout" from="BulletIntervalTimer" to="." method="_on_bullet_interval_timer_timeout"]

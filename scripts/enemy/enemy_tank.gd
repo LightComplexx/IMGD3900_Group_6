@@ -2,10 +2,13 @@ extends "res://scripts/base_classes/tank.gd"
 
 @export var turret_speed = 2.0
 @export var detect_radius = 400
+@export var bullet_interval = 0.3
 
 var parent
 var target = null
 var speed = 0.0
+var bullets_fired = 0
+const BULLETS_PER_BURST = 4
 
 func _ready() -> void:
 	parent = get_parent()
@@ -15,6 +18,7 @@ func _ready() -> void:
 	health = max_health
 	emit_signal("health_changed", health * 100/max_health)
 	$GunTimer.wait_time = gun_cooldown
+	$BulletIntervalTimer.wait_time = bullet_interval
 
 func _process(delta) -> void:
 	if $LookAhead1.is_colliding() or $LookAhead2.is_colliding():
@@ -41,6 +45,12 @@ func control(_delta):
 	else:
 		pass
 
+func _on_shoot() -> void:
+	if can_shoot:
+		can_shoot = false
+		bullets_fired = 0  # Reset bullet count
+		_on_bullet_interval_timer_timeout()  # Fire the first shot immediately
+
 
 func _on_detect_radius_body_entered(body: Node2D) -> void:
 	target = body
@@ -49,3 +59,17 @@ func _on_detect_radius_body_entered(body: Node2D) -> void:
 func _on_detect_radius_body_exited(body: Node2D) -> void:
 	if body == target:
 		target = null
+
+
+func _on_bullet_interval_timer_timeout() -> void:
+	if bullets_fired < BULLETS_PER_BURST:
+		var dir = Vector2(1, 0).rotated($Turret.global_rotation)
+		emit_signal("shoot", Bullet, $Turret/Muzzle.global_position, dir)
+		bullets_fired += 1
+
+		# Schedule the next shot if needed
+		if bullets_fired < BULLETS_PER_BURST:
+			$BulletIntervalTimer.start()  # Start interval for the next shot
+		else:
+			# After the last shot, start the cooldown timer
+			$GunTimer.start()
