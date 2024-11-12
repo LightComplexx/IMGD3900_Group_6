@@ -27,15 +27,18 @@ func _process(delta) -> void:
 		speed = lerp(speed, max_speed, 0.05)
 	
 	if target:
-		var current_dir = Vector2(1, 0).rotated($Turret.global_rotation)
-		var target_dir = (target.global_position - global_position).normalized()
-		$Turret.global_rotation = current_dir.lerp(target_dir, turret_speed * delta).angle()
+		var player_pos = target.global_position
+		var current_dir = Vector2(1, 0).rotated(global_rotation)
+		var target_dir = (player_pos - global_position).normalized()
+		
+		global_rotation = current_dir.lerp(target_dir, turret_speed * delta).angle()
+		
 		if target_dir.dot(current_dir) > 0.9:
 			_on_shoot()
 	else:
-		$Turret.global_rotation = lerp_angle($Turret.global_rotation, global_rotation, turret_speed * delta)
-		if abs($Turret.global_rotation) < 0.01:
-			$Turret.global_rotation = global_rotation
+		global_rotation = lerp_angle(global_rotation, 0.0, turret_speed * delta)
+		if abs(global_rotation) < 0.01:
+			global_rotation = 0.0
 
 
 func control(_delta):

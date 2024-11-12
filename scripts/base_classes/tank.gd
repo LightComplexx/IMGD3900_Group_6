@@ -1,18 +1,22 @@
 extends CharacterBody2D
 
-signal shoot
-signal health_changed
-signal dead
+# signals used to communicate node states between nodes
+signal shoot # handles bullet firing 
+signal health_changed # handles any changes to health
+signal dead # handles death
 
+# Export variables are visible/modifiable in the Inspector
+# Inspector value takes priority over code value
 @export var Bullet:PackedScene
 @export var max_speed = 100.0
 @export var rotation_speed = 1.0
 @export var gun_cooldown = 0.4
 @export var max_health = 100
 
-var can_shoot = true
-var alive = true
-var health
+# Private tank variables
+var can_shoot = true # determines if tank can shoot
+var alive = true # determines if health runs out
+var health # health variable
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -27,20 +31,22 @@ func _physics_process(delta: float) -> void:
 	control(delta)
 	move_and_slide()
 
+# handles tank controls
 func control(_delta: float) -> void:
 	pass
 
-
+# handles damage taken
 func take_damage(amount: float) -> void:
 	health -= amount
 	emit_signal("health_changed", health * 100/max_health)
 	if health <= 0:
 		explode()
 
-
+# handles explosion: explosion effects can be added here
 func explode() -> void:
 	queue_free()
 
+# handles shoot action
 func _on_shoot() -> void:
 	if can_shoot:
 		can_shoot = false
@@ -49,6 +55,6 @@ func _on_shoot() -> void:
 		emit_signal("shoot", Bullet, $Turret/Muzzle.global_position, dir)
 		
 
-
+# resets ability to shoot when cooldown ends
 func _on_gun_timer_timeout() -> void:
 	can_shoot = true
