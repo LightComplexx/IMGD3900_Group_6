@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=3 uid="uid://btw0q8mtjoqmy"]
+
+[ext_resource type="Texture2D" uid="uid://duulbgr7uua2k" path="res://sprites/ui/beta_logo.png" id="1_flg1c"]
+[ext_resource type="FontFile" uid="uid://b0gmlnwtrr3e6" path="res://fonts/Kenney Future.ttf" id="1_lsyrg"]
+[ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_xi1n5"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xi1n5")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.363364, 0.385951, 0.30711, 1)
+
+[node name="Logo" type="Sprite2D" parent="."]
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("1_flg1c")
+offset = Vector2(460, 180)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.0
+offset_top = 90.0
+offset_right = 148.0
+offset_bottom = 309.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Play" type="Button" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("1_lsyrg")
+theme_override_font_sizes/font_size = 40
+text = "Play"
+
+[node name="Help" type="Button" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_lsyrg")
+theme_override_font_sizes/font_size = 40
+text = "Help"
+
+[node name="Quit" type="Button" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("1_lsyrg")
+theme_override_font_sizes/font_size = 40
+text = "Quit"
+
+[connection signal="pressed" from="MarginContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/Help" to="." method="_on_help_pressed"]
+[connection signal="pressed" from="MarginContainer/Quit" to="." method="_on_quit_pressed"]
