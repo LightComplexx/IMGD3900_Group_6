@@ -7,10 +7,10 @@ func _ready() -> void:
 	var player_node = get_parent().get_node("Player")
 	
 	if player_node.get_node("Turret").texture == base_gun:
-		speed = 1500
+		speed = 1400
 		damage = 20
 	if player_node.get_node("Turret").texture == big_gun:
-		speed = 1000
+		speed = 2500
 		damage = 50
 
 func _on_area_entered(area: Area2D) -> void:
