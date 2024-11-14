@@ -32,11 +32,12 @@ func control(_delta):
 		velocity = Vector2(-max_speed/2, 0).rotated(rotation)
 	if Input.is_action_pressed("shoot"):
 		_on_shoot()
+		
 	
 	if Input.is_action_just_pressed("switch_guns"):
 		if gun_texture == base_gun:
 			gun_texture = big_gun
-			gun_cooldown = 1
+			gun_cooldown = 1.5
 			$GunTimer.wait_time = gun_cooldown
 		else:
 			gun_texture = base_gun

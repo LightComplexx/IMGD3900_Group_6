@@ -21,6 +21,8 @@ func _ready() -> void:
 	$BulletIntervalTimer.wait_time = bullet_interval
 
 func _process(delta) -> void:
+	#if $Turret.position != $Turret.global_position
+		#$Turret.         (TODO!!!)
 	if $LookAhead1.is_colliding() or $LookAhead2.is_colliding():
 		speed = lerp(speed, 0.0, 0.1)
 	else:
@@ -65,6 +67,7 @@ func _on_bullet_interval_timer_timeout() -> void:
 	if bullets_fired < BULLETS_PER_BURST:
 		var dir = Vector2(1, 0).rotated($Turret.global_rotation)
 		emit_signal("shoot", Bullet, $Turret/Muzzle.global_position, dir)
+		$Turret.move_local_x(-10)
 		bullets_fired += 1
 
 		# Schedule the next shot if needed

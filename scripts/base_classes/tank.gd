@@ -6,7 +6,7 @@ signal dead
 
 @export var Bullet:PackedScene
 @export var max_speed = 100.0
-@export var rotation_speed = 1.0
+@export var rotation_speed = 2.0
 @export var gun_cooldown = 0.4
 @export var max_health = 100
 
@@ -47,6 +47,7 @@ func _on_shoot() -> void:
 		$GunTimer.start()
 		var dir = Vector2(1, 0).rotated($Turret.global_rotation)
 		emit_signal("shoot", Bullet, $Turret/Muzzle.global_position, dir)
+		$Turret.translate(Vector2(-10,0))
 		
 
 
