@@ -50,3 +50,4 @@ func control(_delta):
 		
 	
 	$Turret.texture = gun_texture
+	move_and_slide()

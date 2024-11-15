@@ -29,7 +29,6 @@ func _physics_process(delta: float) -> void:
 	if not alive:
 		return
 	control(delta)
-	move_and_slide()
 
 # handles tank controls
 func control(_delta: float) -> void:

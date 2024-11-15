@@ -3,15 +3,19 @@ extends "res://scripts/base_classes/tank.gd"
 @export var turret_speed = 2.0
 @export var detect_radius = 400
 @export var bullet_interval = 0.3
+@export var position_markers: Array[Vector2] = []
+var current_marker_index: int = 0
 
-var parent
 var target = null
 var speed = 0.0
 var bullets_fired = 0
 const BULLETS_PER_BURST = 4
+var waiting_for_anim = false
 
 func _ready() -> void:
-	parent = get_parent()
+	if position_markers.size() > 0:
+		position = position_markers[0]
+	
 	var circle = CircleShape2D.new()
 	$DetectRadius/CollisionShape2D.shape = circle
 	$DetectRadius/CollisionShape2D.shape.radius = detect_radius
@@ -44,17 +48,33 @@ func _process(delta) -> void:
 
 
 func control(_delta):
-	if parent is PathFollow2D:
-		parent.set_progress(parent.get_progress() + speed * _delta)
-		position = Vector2()
-	else:
-		pass
+	if position_markers.size() < 2:
+		return # Not enough markers to move between
+
+	# Get current and target positions
+	var target_position = position_markers[current_marker_index]
+
+	# Move towards the target position
+	var direction = (target_position - position).normalized()
+	velocity = direction * speed
+	move_and_slide()
+	
+
+	# Rotate to face the target position
+	rotation = direction.angle()
+
+	# Check if we have reached the current marker
+	if position.distance_to(target_position) < 5.0:  # Adjust threshold as needed
+		# Switch to the next marker
+		current_marker_index = (current_marker_index + 1) % position_markers.size()
 
 func _on_shoot() -> void:
-	if can_shoot:
+	if can_shoot and not waiting_for_anim:
 		can_shoot = false
 		bullets_fired = 0  # Reset bullet count
-		_on_bullet_interval_timer_timeout()  # Fire the first shot immediately
+		waiting_for_anim = true # Notify self that it's waiting for animation
+		$AnimationPlayer.play("shoot_signal") # Start shoot signal animation
+		
 
 
 func _on_detect_radius_body_entered(body: Node2D) -> void:
@@ -62,12 +82,15 @@ func _on_detect_radius_body_entered(body: Node2D) -> void:
 
 
 func _on_detect_radius_body_exited(body: Node2D) -> void:
+	$GunTimer.wait_time = gun_cooldown
+	$BulletIntervalTimer.wait_time = bullet_interval
+	
 	if body == target:
 		target = null
 
 
 func _on_bullet_interval_timer_timeout() -> void:
-	if bullets_fired < BULLETS_PER_BURST:
+	if bullets_fired < BULLETS_PER_BURST and not waiting_for_anim:
 		var dir = Vector2(1, 0).rotated($Turret.global_rotation)
 		emit_signal("shoot", Bullet, $Turret/Muzzle.global_position, dir)
 		$Turret.move_local_x(-10)
@@ -79,3 +102,9 @@ func _on_bullet_interval_timer_timeout() -> void:
 		else:
 			# After the last shot, start the cooldown timer
 			$GunTimer.start()
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "shoot_signal":
+		waiting_for_anim = false
+		_on_bullet_interval_timer_timeout()  # Fire the first shot after animation finishes

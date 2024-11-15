@@ -253,55 +253,17 @@ gun_cooldown = 0.2
 position = Vector2(1408, 320)
 rotation = -0.0067856
 scale = Vector2(0.8, 0.8)
+position_markers = Array[Vector2]([Vector2(2000, 350), Vector2(1260, 760), Vector2(3000, 760)])
 Bullet = ExtResource("5_mmp0p")
 max_health = 50
-
-[node name="Enemy1Markers" type="Node2D" parent="Enemy"]
-position = Vector2(-1757.25, -411.933)
-rotation = 0.0067856
-scale = Vector2(1.25, 1.25)
-
-[node name="Position1" type="Marker2D" parent="Enemy/Enemy1Markers"]
-position = Vector2(2000, 350)
-rotation = -0.0067856
-scale = Vector2(0.8, 0.8)
-
-[node name="Position2" type="Marker2D" parent="Enemy/Enemy1Markers"]
-position = Vector2(1362, 763)
-rotation = -0.0067856
-scale = Vector2(0.8, 0.8)
-
-[node name="Position3" type="Marker2D" parent="Enemy/Enemy1Markers"]
-position = Vector2(3000, 763)
-rotation = -0.0067856
-scale = Vector2(0.8, 0.8)
 
 [node name="Enemy2" parent="." instance=ExtResource("4_sxn56")]
 position = Vector2(1024, 960)
-rotation = -0.171944
+rotation = -0.00698132
 scale = Vector2(0.8, 0.8)
+position_markers = Array[Vector2]([Vector2(1340, 950), Vector2(970, 1320), Vector2(1600, 1320)])
 Bullet = ExtResource("5_mmp0p")
 max_health = 50
-
-[node name="Enemy2Markers" type="Node2D" parent="Enemy2"]
-position = Vector2(-1055.81, -1401.31)
-rotation = 0.171944
-scale = Vector2(1.25, 1.25)
-
-[node name="Position1" type="Marker2D" parent="Enemy2/Enemy2Markers"]
-position = Vector2(1339, 956)
-rotation = -0.0067856
-scale = Vector2(0.8, 0.8)
-
-[node name="Position2" type="Marker2D" parent="Enemy2/Enemy2Markers"]
-position = Vector2(970, 1324)
-rotation = -0.0067856
-scale = Vector2(0.8, 0.8)
-
-[node name="Position3" type="Marker2D" parent="Enemy2/Enemy2Markers"]
-position = Vector2(1600, 1337)
-rotation = -0.0067856
-scale = Vector2(0.8, 0.8)
 
 [node name="HUD" parent="." instance=ExtResource("6_4onjk")]
 

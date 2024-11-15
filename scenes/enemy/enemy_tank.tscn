@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bk06uui08myjf"]
+[gd_scene load_steps=13 format=3 uid="uid://bk06uui08myjf"]
 
 [ext_resource type="PackedScene" uid="uid://bgaadtx5bln0a" path="res://scenes/base_classes/tank.tscn" id="1_rx8kj"]
 [ext_resource type="Script" path="res://scripts/enemy/enemy_tank.gd" id="2_00rm4"]
@@ -6,11 +6,54 @@
 [ext_resource type="Texture2D" uid="uid://blx55e40qljvw" path="res://sprites/tank_bodies/enemy_tank_canon_2.png" id="4_lny0q"]
 [ext_resource type="PackedScene" uid="uid://bdgfouvkixk75" path="res://scenes/ui/enemy_display.tscn" id="5_8727m"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_01k2h"]
-size = Vector2(143, 78)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sr36j"]
+size = Vector2(137, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5rktc"]
+size = Vector2(139, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q5t7r"]
+size = Vector2(8, 78)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ssgt2"]
-size = Vector2(2, 78)
+size = Vector2(16, 64)
+
+[sub_resource type="Animation" id="Animation_jhy5y"]
+resource_name = "shoot_signal"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Turret:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.545098, 0.933333, 0, 1), Color(1, 1, 1, 1), Color(0.545098, 0.933333, 0, 1), Color(1, 1, 1, 1), Color(0.545098, 0.933333, 0, 1), Color(1, 1, 1, 1), Color(0.545098, 0.933333, 0, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ws844"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Turret:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ughjs"]
+_data = {
+"RESET": SubResource("Animation_ws844"),
+"shoot_signal": SubResource("Animation_jhy5y")
+}
 
 [node name="Enemy" instance=ExtResource("1_rx8kj")]
 collision_layer = 4
@@ -34,39 +77,54 @@ offset = Vector2(160, 20)
 [node name="Muzzle" parent="Turret" index="0"]
 position = Vector2(520, 20)
 
-[node name="body_collision" parent="." index="2"]
-position = Vector2(-1.5, 0)
-shape = SubResource("RectangleShape2D_01k2h")
+[node name="side_collision1" parent="." index="2"]
+position = Vector2(2.5, -36)
+shape = SubResource("RectangleShape2D_sr36j")
 
-[node name="BulletDetect" parent="." index="3" groups=["Enemy"]]
+[node name="side_collision2" parent="." index="3"]
+position = Vector2(2.5, 35)
+shape = SubResource("RectangleShape2D_5rktc")
+
+[node name="back_collision" parent="." index="4"]
+position = Vector2(-69, 0)
+shape = SubResource("RectangleShape2D_q5t7r")
+
+[node name="BulletDetect" parent="." index="5" groups=["Enemy"]]
 
 [node name="bullet_collision" parent="BulletDetect" index="0"]
-position = Vector2(72, 0)
+position = Vector2(59, -1)
 shape = SubResource("RectangleShape2D_ssgt2")
+debug_color = Color(0.878431, 0.317647, 0.317647, 0.419608)
 
-[node name="DetectRadius" type="Area2D" parent="." index="4"]
+[node name="DetectRadius" type="Area2D" parent="." index="7"]
 collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRadius" index="0"]
 
-[node name="LookAhead1" type="RayCast2D" parent="." index="5"]
+[node name="LookAhead1" type="RayCast2D" parent="." index="8"]
 position = Vector2(0, -28)
 rotation = -0.0872665
 target_position = Vector2(100, 0)
 collision_mask = 7
 
-[node name="LookAhead2" type="RayCast2D" parent="." index="6"]
+[node name="LookAhead2" type="RayCast2D" parent="." index="9"]
 position = Vector2(0, 30)
 rotation = 0.0872665
 target_position = Vector2(100, 0)
 collision_mask = 7
 
-[node name="EnemyDisplay" parent="." index="7" instance=ExtResource("5_8727m")]
+[node name="EnemyDisplay" parent="." index="10" instance=ExtResource("5_8727m")]
 
-[node name="BulletIntervalTimer" type="Timer" parent="." index="9"]
+[node name="BulletIntervalTimer" type="Timer" parent="." index="11"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="12"]
+libraries = {
+"": SubResource("AnimationLibrary_ughjs")
+}
 
 [connection signal="health_changed" from="." to="EnemyDisplay" method="update_healthbar"]
 [connection signal="body_entered" from="DetectRadius" to="." method="_on_detect_radius_body_entered"]
 [connection signal="body_exited" from="DetectRadius" to="." method="_on_detect_radius_body_exited"]
 [connection signal="timeout" from="BulletIntervalTimer" to="." method="_on_bullet_interval_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
