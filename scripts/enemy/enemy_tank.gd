@@ -1,6 +1,6 @@
 extends "res://scripts/base_classes/tank.gd"
 
-@export var detect_radius = 400
+@export var detect_radius = 500
 @export var bullet_interval = 0.3
 @export var position_markers: Array[Vector2] = []
 var current_marker_index: int = 0
@@ -101,7 +101,7 @@ func explode() -> void:
 	emit_signal("dead")
 
 func _on_bullet_interval_timer_timeout() -> void:
-	if bullets_fired < BULLETS_PER_BURST and not waiting_for_anim:
+	if bullets_fired < BULLETS_PER_BURST and alive and not waiting_for_anim:
 		var dir = Vector2(1, 0).rotated($Turret.global_rotation)
 		emit_signal("shoot", Bullet, $Turret/Muzzle.global_position, dir)
 		#$Turret.move_local_x(-10)
