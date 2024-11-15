@@ -129,6 +129,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="left_side" type="ColorRect" parent="VisualHitboxes" index="0"]
+layout_mode = 0
 offset_left = -67.0
 offset_top = -39.0
 offset_right = 72.0
@@ -136,6 +137,7 @@ offset_bottom = -33.0
 color = Color(0.282353, 0.615686, 0.803922, 0.588235)
 
 [node name="front" type="ColorRect" parent="VisualHitboxes" index="1"]
+layout_mode = 0
 offset_left = 51.0
 offset_top = -33.0
 offset_right = 67.0
@@ -143,6 +145,7 @@ offset_bottom = 31.0
 color = Color(1, 0.27451, 0.215686, 0.345098)
 
 [node name="right_side" type="ColorRect" parent="VisualHitboxes" index="2"]
+layout_mode = 0
 offset_left = -67.0
 offset_top = 35.0
 offset_right = 72.0
@@ -150,6 +153,7 @@ offset_bottom = 39.0
 color = Color(0.282353, 0.615686, 0.803922, 0.588235)
 
 [node name="back" type="ColorRect" parent="VisualHitboxes" index="3"]
+layout_mode = 0
 offset_left = -72.0
 offset_top = -39.0
 offset_right = -67.0
