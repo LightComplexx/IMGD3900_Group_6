@@ -7,7 +7,7 @@ func _ready() -> void:
 	var player_node = get_parent().get_node("Player")
 	
 	if player_node.get_node("Turret").texture == base_gun:
-		speed = 1400
+		speed = 2500
 		damage = 20
 	if player_node.get_node("Turret").texture == big_gun:
 		speed = 2500

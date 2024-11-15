@@ -9,7 +9,7 @@ signal dead # handles death
 # Inspector value takes priority over code value
 @export var Bullet:PackedScene
 @export var max_speed = 100.0
-@export var rotation_speed = 2.0
+@export var max_rotation_speed = 2.0
 @export var gun_cooldown = 0.4
 @export var max_health = 100
 
@@ -43,7 +43,7 @@ func take_damage(amount: float) -> void:
 
 # handles explosion: explosion effects can be added here
 func explode() -> void:
-	queue_free()
+	pass
 
 # handles shoot action
 func _on_shoot() -> void:
@@ -53,7 +53,7 @@ func _on_shoot() -> void:
 		var dir = Vector2(1, 0).rotated($Turret.global_rotation)
 		emit_signal("shoot", Bullet, $Turret/Muzzle.global_position, dir)
 		
-		$Turret.translate(Vector2(-10,0)) #turret recoil, value is draft
+		#$Turret.translate(Vector2(-10,0)) #turret recoil, value is draft
 		#TODO: Make the turret return at a set rate
 		#TODO: Scale the recoil amount by projectile damage
 		
@@ -61,3 +61,7 @@ func _on_shoot() -> void:
 # resets ability to shoot when cooldown ends
 func _on_gun_timer_timeout() -> void:
 	can_shoot = true
+
+
+func _on_explosion_animation_finished() -> void:
+	queue_free()

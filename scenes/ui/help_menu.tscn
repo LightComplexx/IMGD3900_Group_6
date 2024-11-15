@@ -1,0 +1,261 @@
+[gd_scene load_steps=11 format=3 uid="uid://dgfsajfh3gln2"]
+
+[ext_resource type="Script" path="res://scripts/ui/help_menu.gd" id="1_uw3q8"]
+[ext_resource type="Texture2D" uid="uid://duulbgr7uua2k" path="res://sprites/ui/beta_logo.png" id="2_i74rl"]
+[ext_resource type="FontFile" uid="uid://b0gmlnwtrr3e6" path="res://fonts/Kenney Future.ttf" id="3_mu2jp"]
+[ext_resource type="Texture2D" uid="uid://4fynqsr0w8gd" path="res://sprites/ui/enemy_damageable_parts.png" id="3_p7shq"]
+[ext_resource type="Texture2D" uid="uid://cvbkrra048c52" path="res://sprites/ui/keyboard_keys/keyboard_a.png" id="4_m7meq"]
+[ext_resource type="Texture2D" uid="uid://bdm7pxdh5j31a" path="res://sprites/ui/keyboard_keys/keyboard_s.png" id="5_fidal"]
+[ext_resource type="Texture2D" uid="uid://c3vs6a105qqhw" path="res://sprites/ui/keyboard_keys/keyboard_w.png" id="6_dn25y"]
+[ext_resource type="Texture2D" uid="uid://d2i7j60m7x54l" path="res://sprites/ui/keyboard_keys/keyboard_d.png" id="7_x3slx"]
+[ext_resource type="Texture2D" uid="uid://ixinma6qudcm" path="res://sprites/ui/keyboard_keys/keyboard_space_icon.png" id="8_rs287"]
+[ext_resource type="Texture2D" uid="uid://cyioea30iksh0" path="res://sprites/ui/keyboard_keys/keyboard_j.png" id="8_uwacx"]
+
+[node name="HelpMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uw3q8")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.363364, 0.385951, 0.30711, 1)
+
+[node name="Logo" type="Sprite2D" parent="."]
+position = Vector2(-47, 1.90735e-06)
+scale = Vector2(0.341116, 0.341116)
+texture = ExtResource("2_i74rl")
+offset = Vector2(460, 180)
+
+[node name="Enemy" type="Sprite2D" parent="."]
+position = Vector2(696, 336)
+scale = Vector2(0.316787, 0.316787)
+texture = ExtResource("3_p7shq")
+offset = Vector2(460, 180)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.065
+offset_top = -58.91
+offset_right = 168.065
+offset_bottom = -15.91
+grow_vertical = 0
+
+[node name="Back" type="Button" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3_mu2jp")
+theme_override_font_sizes/font_size = 30
+text = "Back"
+
+[node name="PlayerControls" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -508.0
+offset_top = -184.0
+offset_right = -156.0
+offset_bottom = -91.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_mu2jp")
+theme_override_font_sizes/font_size = 40
+text = "Player Controls:"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="EnemyData" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 124.0
+offset_top = -152.0
+offset_right = 484.0
+offset_bottom = -104.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_mu2jp")
+theme_override_font_sizes/font_size = 40
+text = "Enemy 
+Data:"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="EnemyData2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 124.0
+offset_top = 136.0
+offset_right = 484.0
+offset_bottom = 229.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_mu2jp")
+theme_override_font_sizes/font_size = 25
+text = "Blue: Cannot Damage
+Red: Can Damage"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Shoot" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = 192.0
+offset_right = -116.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_mu2jp")
+theme_override_font_sizes/font_size = 20
+text = "Shoot Bullets"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Fwd" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 72.0
+offset_top = -56.0
+offset_right = 347.0
+offset_bottom = -21.0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_mu2jp")
+theme_override_font_sizes/font_size = 20
+text = "Forward"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Right" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -316.0
+offset_top = -352.0
+offset_right = -177.0
+offset_bottom = -303.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_mu2jp")
+theme_override_font_sizes/font_size = 20
+text = "Rotate 
+Right"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Left" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -492.0
+offset_top = 368.0
+offset_right = -369.0
+offset_bottom = 417.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_mu2jp")
+theme_override_font_sizes/font_size = 20
+text = "Rotate
+Left"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Back" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -476.0
+offset_top = -232.0
+offset_right = -201.0
+offset_bottom = -197.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_mu2jp")
+theme_override_font_sizes/font_size = 20
+text = "Backward"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Change" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -148.0
+offset_top = -264.0
+offset_right = 4.0
+offset_bottom = -215.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_mu2jp")
+theme_override_font_sizes/font_size = 20
+text = "Change Guns "
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="AKey" type="Sprite2D" parent="."]
+position = Vector2(120, 448)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_m7meq")
+
+[node name="SKey" type="Sprite2D" parent="."]
+position = Vector2(200, 448)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_fidal")
+
+[node name="WKey" type="Sprite2D" parent="."]
+position = Vector2(200, 368)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_dn25y")
+
+[node name="DKey" type="Sprite2D" parent="."]
+position = Vector2(280, 448)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_x3slx")
+
+[node name="JKey" type="Sprite2D" parent="."]
+position = Vector2(459, 416)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_uwacx")
+
+[node name="SpaceKey" type="Sprite2D" parent="."]
+position = Vector2(352, 512)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_rs287")
+
+[connection signal="pressed" from="MarginContainer/Back" to="." method="_on_back_pressed"]

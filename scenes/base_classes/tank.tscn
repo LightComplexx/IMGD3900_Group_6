@@ -1,6 +1,50 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgaadtx5bln0a"]
+[gd_scene load_steps=12 format=3 uid="uid://bgaadtx5bln0a"]
 
 [ext_resource type="Script" path="res://scripts/base_classes/tank.gd" id="1_hiiss"]
+[ext_resource type="Texture2D" uid="uid://cfgwp158u80jh" path="res://sprites/effects/boom1/boom1.png" id="2_8gxqm"]
+[ext_resource type="Texture2D" uid="uid://bjej48s1cqquk" path="res://sprites/effects/boom1/boom2.png" id="3_ewo7f"]
+[ext_resource type="Texture2D" uid="uid://d4jt0o360eq0p" path="res://sprites/effects/boom1/boom3.png" id="4_3g8ox"]
+[ext_resource type="Texture2D" uid="uid://dt2ityxvo8vdx" path="res://sprites/effects/boom1/boom4.png" id="5_klnvk"]
+[ext_resource type="Texture2D" uid="uid://b41nw7wg78y0c" path="res://sprites/effects/boom1/boom5.png" id="6_c8wbw"]
+[ext_resource type="Texture2D" uid="uid://b4ocwhqiaw8de" path="res://sprites/effects/boom1/boom6.png" id="7_fpkqw"]
+[ext_resource type="Texture2D" uid="uid://bvc1gvjt7qtcy" path="res://sprites/effects/boom1/boom7.png" id="8_yrtw3"]
+[ext_resource type="Texture2D" uid="uid://cy64apqy4l8lb" path="res://sprites/effects/boom1/boom8.png" id="9_bfjl4"]
+[ext_resource type="Texture2D" uid="uid://ceeo1qrae4aiq" path="res://sprites/effects/boom1/boom9.png" id="10_7b0rk"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p3udr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8gxqm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ewo7f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3g8ox")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_klnvk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_c8wbw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_fpkqw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_yrtw3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_bfjl4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_7b0rk")
+}],
+"loop": false,
+"name": &"explosion",
+"speed": 10.0
+}]
 
 [node name="Tank" type="CharacterBody2D"]
 script = ExtResource("1_hiiss")
@@ -23,4 +67,10 @@ script = ExtResource("1_hiiss")
 
 [node name="GunTimer" type="Timer" parent="."]
 
+[node name="Explosion" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_p3udr")
+animation = &"explosion"
+
 [connection signal="timeout" from="GunTimer" to="." method="_on_gun_timer_timeout"]
+[connection signal="animation_finished" from="Explosion" to="." method="_on_explosion_animation_finished"]

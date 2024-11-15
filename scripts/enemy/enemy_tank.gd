@@ -1,12 +1,11 @@
 extends "res://scripts/base_classes/tank.gd"
 
-@export var turret_speed = 2.0
 @export var detect_radius = 400
 @export var bullet_interval = 0.3
 @export var position_markers: Array[Vector2] = []
 var current_marker_index: int = 0
 
-var target = null
+var player = null
 var speed = 0.0
 var bullets_fired = 0
 const BULLETS_PER_BURST = 4
@@ -30,42 +29,45 @@ func _process(delta) -> void:
 	if $LookAhead1.is_colliding() or $LookAhead2.is_colliding():
 		speed = lerp(speed, 0.0, 0.1)
 	else:
-		speed = lerp(speed, max_speed, 0.05)
+		speed = max_speed
 	
-	if target:
-		var player_pos = target.global_position
-		var current_dir = Vector2(1, 0).rotated(global_rotation)
-		var target_dir = (player_pos - global_position).normalized()
-		
-		global_rotation = current_dir.lerp(target_dir, turret_speed * delta).angle()
-		
-		if target_dir.dot(current_dir) > 0.9:
-			_on_shoot()
-	else:
-		global_rotation = lerp_angle(global_rotation, 0.0, turret_speed * delta)
-		if abs(global_rotation) < 0.01:
-			global_rotation = 0.0
 
 
 func control(_delta):
 	if position_markers.size() < 2:
 		return # Not enough markers to move between
 
-	# Get current and target positions
-	var target_position = position_markers[current_marker_index]
-
-	# Move towards the target position
-	var direction = (target_position - position).normalized()
-	velocity = direction * speed
-	move_and_slide()
+	# Determine target based on is_aggro state
+	var target_position: Vector2
+	if player:
+		# If player in aggro range, set target to player’s position
+		target_position = player.position # Assumes player has a position variable
+	else:
+		# Otherwise, continue moving toward current marker
+		target_position = position_markers[current_marker_index]
 	
-
+	var current_dir = Vector2(1, 0).rotated(rotation)
+	var target_dir = (target_position - position).normalized()
+	
+	if target_dir.dot(current_dir) > 0.9:
+		if player:
+			_on_shoot()
+			if position.distance_to(target_position) > 10.0:
+				velocity = current_dir * speed/2
+				move_and_slide()
+		else:
+			velocity = current_dir * speed
+			move_and_slide()
+	
 	# Rotate to face the target position
-	rotation = direction.angle()
-
-	# Check if we have reached the current marker
-	if position.distance_to(target_position) < 5.0:  # Adjust threshold as needed
-		# Switch to the next marker
+	var target_angle = target_dir.angle()
+	var angle_diff = wrapf(target_angle - rotation, -PI, PI)
+	rotation += clamp(angle_diff, -max_rotation_speed * _delta, max_rotation_speed * _delta)
+	
+	
+	# Check if we've reached the current marker
+	if not player and position.distance_to(target_position) < 5.0:
+		# Switch to the next marker if not in aggro state
 		current_marker_index = (current_marker_index + 1) % position_markers.size()
 
 func _on_shoot() -> void:
@@ -76,24 +78,33 @@ func _on_shoot() -> void:
 		$AnimationPlayer.play("shoot_signal") # Start shoot signal animation
 		
 
-
 func _on_detect_radius_body_entered(body: Node2D) -> void:
-	target = body
+	player = body
 
 
 func _on_detect_radius_body_exited(body: Node2D) -> void:
-	$GunTimer.wait_time = gun_cooldown
-	$BulletIntervalTimer.wait_time = bullet_interval
-	
-	if body == target:
-		target = null
+	if body == player:
+		player = null
 
+
+func explode() -> void:
+	$side_collision1.set_deferred("disabled", true)
+	$side_collision2.set_deferred("disabled", true)
+	$back_collision.set_deferred("disabled", true)
+	$BulletDetect/bullet_collision.set_deferred("disabled", true)
+	$VisualHitboxes.set_deferred("visible", false)
+	alive = false
+	$TankBody.hide()
+	$Turret.hide()
+	$Explosion.show()
+	$Explosion.play()
+	emit_signal("dead")
 
 func _on_bullet_interval_timer_timeout() -> void:
 	if bullets_fired < BULLETS_PER_BURST and not waiting_for_anim:
 		var dir = Vector2(1, 0).rotated($Turret.global_rotation)
 		emit_signal("shoot", Bullet, $Turret/Muzzle.global_position, dir)
-		$Turret.move_local_x(-10)
+		#$Turret.move_local_x(-10)
 		bullets_fired += 1
 
 		# Schedule the next shot if needed

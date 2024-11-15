@@ -18,6 +18,21 @@ size = Vector2(8, 78)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ssgt2"]
 size = Vector2(16, 64)
 
+[sub_resource type="Animation" id="Animation_ws844"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Turret:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_jhy5y"]
 resource_name = "shoot_signal"
 step = 0.1
@@ -34,21 +49,6 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(0.545098, 0.933333, 0, 1), Color(1, 1, 1, 1), Color(0.545098, 0.933333, 0, 1), Color(1, 1, 1, 1), Color(0.545098, 0.933333, 0, 1), Color(1, 1, 1, 1), Color(0.545098, 0.933333, 0, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_ws844"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Turret:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ughjs"]
 _data = {
 "RESET": SubResource("Animation_ws844"),
@@ -59,11 +59,10 @@ _data = {
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("2_00rm4")
-turret_speed = 2.0
 detect_radius = 400
 bullet_interval = 0.3
+position_markers = Array[Vector2]([])
 gun_cooldown = 2.0
-metadata/_edit_group_ = true
 
 [node name="TankBody" parent="." index="0"]
 scale = Vector2(0.15, 0.15)
@@ -105,13 +104,13 @@ collision_mask = 2
 [node name="LookAhead1" type="RayCast2D" parent="." index="8"]
 position = Vector2(0, -28)
 rotation = -0.0872665
-target_position = Vector2(100, 0)
+target_position = Vector2(137.612, -1.01019)
 collision_mask = 7
 
 [node name="LookAhead2" type="RayCast2D" parent="." index="9"]
 position = Vector2(0, 30)
 rotation = 0.0872665
-target_position = Vector2(100, 0)
+target_position = Vector2(133.453, -0.633575)
 collision_mask = 7
 
 [node name="EnemyDisplay" parent="." index="10" instance=ExtResource("5_8727m")]
@@ -122,6 +121,40 @@ collision_mask = 7
 libraries = {
 "": SubResource("AnimationLibrary_ughjs")
 }
+
+[node name="VisualHitboxes" type="Control" parent="." index="14"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="left_side" type="ColorRect" parent="VisualHitboxes" index="0"]
+offset_left = -67.0
+offset_top = -39.0
+offset_right = 72.0
+offset_bottom = -33.0
+color = Color(0.282353, 0.615686, 0.803922, 0.588235)
+
+[node name="front" type="ColorRect" parent="VisualHitboxes" index="1"]
+offset_left = 51.0
+offset_top = -33.0
+offset_right = 67.0
+offset_bottom = 31.0
+color = Color(1, 0.27451, 0.215686, 0.345098)
+
+[node name="right_side" type="ColorRect" parent="VisualHitboxes" index="2"]
+offset_left = -67.0
+offset_top = 35.0
+offset_right = 72.0
+offset_bottom = 39.0
+color = Color(0.282353, 0.615686, 0.803922, 0.588235)
+
+[node name="back" type="ColorRect" parent="VisualHitboxes" index="3"]
+offset_left = -72.0
+offset_top = -39.0
+offset_right = -67.0
+offset_bottom = 39.0
+color = Color(0.282353, 0.615686, 0.803922, 0.588235)
 
 [connection signal="health_changed" from="." to="EnemyDisplay" method="update_healthbar"]
 [connection signal="body_entered" from="DetectRadius" to="." method="_on_detect_radius_body_entered"]
