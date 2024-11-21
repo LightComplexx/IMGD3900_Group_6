@@ -41,3 +41,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 func update_score(score):
 	$EnemyInfo/EnemyCount.text = str(score)
+
+
+func update_level(level):
+	$LevelInfo/LevelNum.text = str(level)

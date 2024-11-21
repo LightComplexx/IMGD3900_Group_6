@@ -48,6 +48,23 @@ _data = {
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_s2x4c")
 
+[node name="Message" type="ColorRect" parent="."]
+visible = false
+offset_right = 1080.0
+offset_bottom = 720.0
+color = Color(0.384314, 0.384314, 0.384314, 0.454902)
+
+[node name="Label" type="Label" parent="Message"]
+layout_mode = 2
+offset_top = 311.0
+offset_right = 1040.0
+offset_bottom = 368.0
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 50
+text = "ALL ENEMIES DEFEATED!!!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Margin" type="MarginContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
@@ -83,18 +100,33 @@ offset_right = 179.0
 offset_bottom = 123.0
 theme_override_fonts/font = ExtResource("6_vmtmu")
 theme_override_font_sizes/font_size = 20
-text = "Enemies 
-Remaining: "
-horizontal_alignment = 1
+text = "Enemies: "
 vertical_alignment = 1
 
 [node name="EnemyCount" type="Label" parent="EnemyInfo"]
 layout_mode = 2
-offset_left = 155.0
-offset_top = 13.0
-offset_right = 188.0
-offset_bottom = 58.0
+offset_left = 122.0
+offset_right = 155.0
+offset_bottom = 45.0
 size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 40
+text = "0"
+
+[node name="LevelInfo" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 142.0
+offset_right = 121.0
+offset_bottom = 165.0
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 20
+text = "Level: "
+
+[node name="LevelNum" type="Label" parent="LevelInfo"]
+offset_left = 97.0
+offset_top = -11.0
+offset_right = 137.0
+offset_bottom = 34.0
 theme_override_fonts/font = ExtResource("6_vmtmu")
 theme_override_font_sizes/font_size = 40
 text = "0"

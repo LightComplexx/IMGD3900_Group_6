@@ -24,6 +24,7 @@ func _ready() -> void:
 	emit_signal("health_changed", health * 100/max_health)
 	$GunTimer.wait_time = gun_cooldown
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	if not alive:

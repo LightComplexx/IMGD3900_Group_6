@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bk06uui08myjf"]
+[gd_scene load_steps=12 format=3 uid="uid://bk06uui08myjf"]
 
 [ext_resource type="PackedScene" uid="uid://bgaadtx5bln0a" path="res://scenes/base_classes/tank.tscn" id="1_rx8kj"]
 [ext_resource type="Script" path="res://scripts/enemy/enemy_tank.gd" id="2_00rm4"]
+[ext_resource type="PackedScene" uid="uid://c5n6pf6ghtc4k" path="res://scenes/enemy/enemy_bullet.tscn" id="3_aribg"]
 [ext_resource type="Texture2D" uid="uid://dfndceesq6kcx" path="res://sprites/tank_bodies/enemy_tank_body_2.png" id="3_h8jbx"]
 [ext_resource type="Texture2D" uid="uid://blx55e40qljvw" path="res://sprites/tank_bodies/enemy_tank_canon_2.png" id="4_lny0q"]
 [ext_resource type="PackedScene" uid="uid://bdgfouvkixk75" path="res://scenes/ui/enemy_display.tscn" id="5_8727m"]
@@ -56,6 +57,7 @@ script = ExtResource("2_00rm4")
 detect_radius = 400
 bullet_interval = 0.3
 position_markers = Array[Vector2]([])
+Bullet = ExtResource("3_aribg")
 gun_cooldown = 2.0
 metadata/_edit_group_ = true
 
