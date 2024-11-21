@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cydf7xikx1tn6"]
+[gd_scene load_steps=10 format=3 uid="uid://cydf7xikx1tn6"]
 
 [ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_s2x4c"]
 [ext_resource type="Texture2D" uid="uid://1wn0xeaergs0" path="res://sprites/ui/health_bar_clear.png" id="2_y827c"]
 [ext_resource type="Texture2D" uid="uid://dvlaeyn7sekrr" path="res://sprites/ui/health_bar_green.png" id="3_w0sag"]
 [ext_resource type="Texture2D" uid="uid://cso0h5my7ewms" path="res://sprites/ui/health_bar_orange.png" id="4_7o8d0"]
 [ext_resource type="Texture2D" uid="uid://bxs2hvfruhf01" path="res://sprites/ui/health_bar_yellow.png" id="5_t5ujx"]
+[ext_resource type="FontFile" uid="uid://b0gmlnwtrr3e6" path="res://fonts/Kenney Future.ttf" id="6_vmtmu"]
 
 [sub_resource type="Animation" id="Animation_yduuo"]
 length = 0.001
@@ -74,5 +75,28 @@ texture_progress = ExtResource("3_w0sag")
 libraries = {
 "": SubResource("AnimationLibrary_dpnj0")
 }
+
+[node name="EnemyInfo" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 74.0
+offset_right = 179.0
+offset_bottom = 123.0
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 20
+text = "Enemies 
+Remaining: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnemyCount" type="Label" parent="EnemyInfo"]
+layout_mode = 2
+offset_left = 155.0
+offset_top = 13.0
+offset_right = 188.0
+offset_bottom = 58.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 40
+text = "0"
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

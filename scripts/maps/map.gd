@@ -1,9 +1,13 @@
 extends Node2D
 
+var enemy_count
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_camera_limits()
+	enemy_count = get_tree().get_nodes_in_group("Enemy").size()
+	$HUD.update_score(enemy_count)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -29,3 +33,8 @@ func _on_Tank_shoot(bullet, _position, _direction):
 
 func _on_player_dead() -> void:
 	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
+
+
+func _on_enemy_dead() -> void:
+	enemy_count -= 1
+	$HUD.update_score(enemy_count)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://ddi0dykphdkwa"]
+[gd_scene load_steps=13 format=4 uid="uid://ddi0dykphdkwa"]
 
 [ext_resource type="Script" path="res://scripts/maps/map.gd" id="1_04v3r"]
 [ext_resource type="Texture2D" uid="uid://ch5k0sr2j1x3h" path="res://sprites/tilemaps/terrainTiles_retina.png" id="2_0pu27"]
@@ -233,6 +233,18 @@ terrain_set_1/terrain_3/name = "d_curve"
 terrain_set_1/terrain_3/color = Color(0.375, 0.5, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_1brsq")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oapb2"]
+size = Vector2(0.32, 16.93)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e7ksv"]
+size = Vector2(0.32, 34.56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5n63"]
+size = Vector2(45.6, 0.8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w6q7n"]
+size = Vector2(45.36, 0.959997)
+
 [node name="Map01" type="Node2D"]
 script = ExtResource("1_04v3r")
 
@@ -292,10 +304,36 @@ max_health = 50
 
 [node name="HUD" parent="." instance=ExtResource("6_4onjk")]
 
+[node name="map_bounds" type="StaticBody2D" parent="."]
+
+[node name="left_bound" type="CollisionShape2D" parent="map_bounds"]
+position = Vector2(-16, 835.5)
+scale = Vector2(100, 100)
+shape = SubResource("RectangleShape2D_oapb2")
+
+[node name="right_bound" type="CollisionShape2D" parent="map_bounds"]
+position = Vector2(4496, 832)
+scale = Vector2(100, 50)
+shape = SubResource("RectangleShape2D_e7ksv")
+
+[node name="top_bound" type="CollisionShape2D" parent="map_bounds"]
+position = Vector2(2256, -20)
+scale = Vector2(100, 50)
+shape = SubResource("RectangleShape2D_h5n63")
+
+[node name="bottom_bound" type="CollisionShape2D" parent="map_bounds"]
+position = Vector2(2236, 1688)
+scale = Vector2(100, 50)
+shape = SubResource("RectangleShape2D_w6q7n")
+
 [connection signal="dead" from="Player" to="." method="_on_player_dead"]
 [connection signal="health_changed" from="Player" to="HUD" method="update_healthbar"]
 [connection signal="shoot" from="Player" to="." method="_on_Tank_shoot"]
+[connection signal="dead" from="Enemy" to="." method="_on_enemy_dead"]
 [connection signal="shoot" from="Enemy" to="." method="_on_Tank_shoot"]
+[connection signal="dead" from="Enemy2" to="." method="_on_enemy_dead"]
 [connection signal="shoot" from="Enemy2" to="." method="_on_Tank_shoot"]
+[connection signal="dead" from="Enemy3" to="." method="_on_enemy_dead"]
 [connection signal="shoot" from="Enemy3" to="." method="_on_Tank_shoot"]
+[connection signal="dead" from="Enemy4" to="." method="_on_enemy_dead"]
 [connection signal="shoot" from="Enemy4" to="." method="_on_Tank_shoot"]

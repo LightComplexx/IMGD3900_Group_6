@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	# Check if the colliding area is the "BulletDetect" Area2D node
-	if area.name == "BulletDetect" and area.is_in_group("Enemy"):
+	if area.name == "BulletDetect" and area.get_parent().is_in_group("Enemy"):
 		# Ensure the area has a CollisionShape2D named "bullet_collision"
 		if area.has_node("bullet_collision"):
 			var bullet_shape = area.get_node("bullet_collision") as CollisionShape2D

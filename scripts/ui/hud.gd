@@ -36,3 +36,8 @@ func update_healthbar(value) -> void:
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "healthbar_flash":
 		$Margin/Container/HealthBar.texture_progress = bar_texture
+		
+
+
+func update_score(score):
+	$EnemyInfo/EnemyCount.text = str(score)

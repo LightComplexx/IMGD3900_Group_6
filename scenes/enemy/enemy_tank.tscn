@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bk06uui08myjf"]
+[gd_scene load_steps=11 format=3 uid="uid://bk06uui08myjf"]
 
 [ext_resource type="PackedScene" uid="uid://bgaadtx5bln0a" path="res://scenes/base_classes/tank.tscn" id="1_rx8kj"]
 [ext_resource type="Script" path="res://scripts/enemy/enemy_tank.gd" id="2_00rm4"]
@@ -6,17 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://blx55e40qljvw" path="res://sprites/tank_bodies/enemy_tank_canon_2.png" id="4_lny0q"]
 [ext_resource type="PackedScene" uid="uid://bdgfouvkixk75" path="res://scenes/ui/enemy_display.tscn" id="5_8727m"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sr36j"]
-size = Vector2(137, 6)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5rktc"]
-size = Vector2(139, 8)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q5t7r"]
-size = Vector2(8, 78)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pojde"]
+size = Vector2(147, 78)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ssgt2"]
-size = Vector2(16, 64)
+size = Vector2(24, 68)
 
 [sub_resource type="Animation" id="Animation_ws844"]
 length = 0.001
@@ -55,7 +49,7 @@ _data = {
 "shoot_signal": SubResource("Animation_jhy5y")
 }
 
-[node name="Enemy" instance=ExtResource("1_rx8kj")]
+[node name="Enemy" groups=["Enemy"] instance=ExtResource("1_rx8kj")]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("2_00rm4")
@@ -63,6 +57,7 @@ detect_radius = 400
 bullet_interval = 0.3
 position_markers = Array[Vector2]([])
 gun_cooldown = 2.0
+metadata/_edit_group_ = true
 
 [node name="TankBody" parent="." index="0"]
 scale = Vector2(0.15, 0.15)
@@ -76,59 +71,50 @@ offset = Vector2(160, 20)
 [node name="Muzzle" parent="Turret" index="0"]
 position = Vector2(520, 20)
 
-[node name="side_collision1" parent="." index="2"]
-position = Vector2(2.5, -36)
-shape = SubResource("RectangleShape2D_sr36j")
-
-[node name="side_collision2" parent="." index="3"]
-position = Vector2(2.5, 35)
-shape = SubResource("RectangleShape2D_5rktc")
-
-[node name="back_collision" parent="." index="4"]
-position = Vector2(-69, 0)
-shape = SubResource("RectangleShape2D_q5t7r")
-
-[node name="BulletDetect" parent="." index="5" groups=["Enemy"]]
+[node name="BodyCollision" parent="." index="2"]
+position = Vector2(1.5, 0)
+shape = SubResource("RectangleShape2D_pojde")
 
 [node name="bullet_collision" parent="BulletDetect" index="0"]
-position = Vector2(59, -1)
+position = Vector2(62, 0)
 shape = SubResource("RectangleShape2D_ssgt2")
 debug_color = Color(0.878431, 0.317647, 0.317647, 0.419608)
 
-[node name="DetectRadius" type="Area2D" parent="." index="7"]
+[node name="DetectRadius" type="Area2D" parent="." index="6"]
 collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRadius" index="0"]
 
-[node name="LookAhead1" type="RayCast2D" parent="." index="8"]
+[node name="LookAhead1" type="RayCast2D" parent="." index="7"]
 position = Vector2(0, -28)
 rotation = -0.0872665
 target_position = Vector2(137.612, -1.01019)
 collision_mask = 7
 
-[node name="LookAhead2" type="RayCast2D" parent="." index="9"]
+[node name="LookAhead2" type="RayCast2D" parent="." index="8"]
 position = Vector2(0, 30)
 rotation = 0.0872665
 target_position = Vector2(133.453, -0.633575)
 collision_mask = 7
 
-[node name="EnemyDisplay" parent="." index="10" instance=ExtResource("5_8727m")]
+[node name="EnemyDisplay" parent="." index="9" instance=ExtResource("5_8727m")]
 
-[node name="BulletIntervalTimer" type="Timer" parent="." index="11"]
+[node name="BulletIntervalTimer" type="Timer" parent="." index="10"]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="12"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="11"]
 libraries = {
 "": SubResource("AnimationLibrary_ughjs")
 }
 
-[node name="VisualHitboxes" type="Control" parent="." index="14"]
+[node name="VisualHitboxes" type="Control" parent="." index="12"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="left_side" type="ColorRect" parent="VisualHitboxes" index="0"]
+visible = false
 layout_mode = 0
 offset_left = -67.0
 offset_top = -39.0
@@ -138,13 +124,14 @@ color = Color(0.282353, 0.615686, 0.803922, 0.588235)
 
 [node name="front" type="ColorRect" parent="VisualHitboxes" index="1"]
 layout_mode = 0
-offset_left = 51.0
-offset_top = -33.0
-offset_right = 67.0
-offset_bottom = 31.0
+offset_left = 50.0
+offset_top = -34.0
+offset_right = 74.0
+offset_bottom = 34.0
 color = Color(1, 0.27451, 0.215686, 0.345098)
 
 [node name="right_side" type="ColorRect" parent="VisualHitboxes" index="2"]
+visible = false
 layout_mode = 0
 offset_left = -67.0
 offset_top = 35.0
@@ -153,6 +140,7 @@ offset_bottom = 39.0
 color = Color(0.282353, 0.615686, 0.803922, 0.588235)
 
 [node name="back" type="ColorRect" parent="VisualHitboxes" index="3"]
+visible = false
 layout_mode = 0
 offset_left = -72.0
 offset_top = -39.0

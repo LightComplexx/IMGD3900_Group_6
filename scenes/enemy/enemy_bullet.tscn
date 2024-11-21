@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c5n6pf6ghtc4k"]
 
 [ext_resource type="PackedScene" uid="uid://bf50puw5bv6fj" path="res://scenes/base_classes/bullet.tscn" id="1_wgxi2"]
-[ext_resource type="Script" path="res://scenes/enemy/enemy_bullet.gd" id="2_qna28"]
+[ext_resource type="Script" path="res://scripts/enemy/enemy_bullet.gd" id="2_qna28"]
 [ext_resource type="Texture2D" uid="uid://46dbea17xb2r" path="res://sprites/bullets/red_tankbullet.png" id="2_xerwy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kwco3"]

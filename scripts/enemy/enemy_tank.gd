@@ -88,12 +88,12 @@ func _on_detect_radius_body_exited(body: Node2D) -> void:
 
 
 func explode() -> void:
-	$side_collision1.set_deferred("disabled", true)
-	$side_collision2.set_deferred("disabled", true)
-	$back_collision.set_deferred("disabled", true)
+	$BodyCollision.set_deferred("disabled", true)
 	$BulletDetect/bullet_collision.set_deferred("disabled", true)
 	$VisualHitboxes.set_deferred("visible", false)
 	alive = false
+	$BulletIntervalTimer.stop()
+	$GunTimer.stop()
 	$TankBody.hide()
 	$Turret.hide()
 	$Explosion.show()

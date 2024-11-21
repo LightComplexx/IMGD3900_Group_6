@@ -9,6 +9,7 @@ var gun_texture = base_gun
 func _process(_delta: float) -> void:
 	pass
 
+
 func control(_delta):
 	var rot_dir = 0
 	
@@ -60,7 +61,6 @@ func control(_delta):
 	# Set gun texture
 	$Turret.texture = gun_texture
 	move_and_slide()
-
 
 func explode() -> void:
 	emit_signal("dead")
