@@ -12,8 +12,8 @@ func _ready() -> void:
 	set_camera_limits()
 	add_enemies()
 	enemy_count = get_tree().get_nodes_in_group("Enemy").size()
-	$HUD.update_score(enemy_count)
-	$HUD.update_level(Globals.enemy_level + 1)
+	$Player/HUD.update_score(enemy_count)
+	$Player/HUD.update_level(Globals.enemy_level + 1)
 
 
 func set_camera_limits():
@@ -34,7 +34,9 @@ func add_enemies():
 		enemy.position_markers.append(Vector2(randi_range(60, 4400), randi_range(60, 1600)))
 		enemy.position_markers.append(Vector2(randi_range(60, 4400), randi_range(60, 1600)))
 		enemy.position_markers.append(Vector2(randi_range(60, 4400), randi_range(60, 1600)))
+		
 		# Set enemy variables if needed
+		enemy.max_health = 100 + (5 * Globals.enemy_level%2)
 		
 		# Spawn the mob by adding it to the Main scene.
 		add_child(enemy)
@@ -42,7 +44,6 @@ func add_enemies():
 		# Connect signals
 		enemy.shoot.connect(_on_Tank_shoot)
 		enemy.dead.connect(_on_enemy_dead)
-		
 		
 	print(Globals.enemy_level)
 
@@ -58,13 +59,13 @@ func _on_player_dead() -> void:
 
 func _on_enemy_dead():
 	enemy_count -= 1
-	$HUD.update_score(enemy_count)
+	$Player/HUD.update_score(enemy_count)
 	
 	if enemy_count == 0:
-		$HUD/Message.show()
+		$Player/HUD/Message.show()
 		$ProgessTimer.start()
 
 
 func _on_progress_timer_timeout() -> void:
-	$HUD/Message.hide()
+	$Player/HUD/Message.hide()
 	Globals.adv_enemy_level()

@@ -1,5 +1,7 @@
 extends "res://scripts/base_classes/bullet.gd"
 
+func _ready() -> void:
+	damage = damage + (1 * Globals.enemy_level)
 
 func _on_area_entered(area: Area2D) -> void:
 	# Check if the colliding area is the "BulletDetect" Area2D node

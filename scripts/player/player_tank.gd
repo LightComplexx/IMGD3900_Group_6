@@ -5,6 +5,12 @@ var big_gun = preload("res://sprites/tank_guns/big_gun.png")
 
 var gun_texture = base_gun
 
+func _ready() -> void:
+	health = max_health
+	health_changed.connect($HUD.update_healthbar)
+	emit_signal("health_changed", health * 100/max_health)
+	$GunTimer.wait_time = gun_cooldown
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
