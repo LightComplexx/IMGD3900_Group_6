@@ -4,6 +4,8 @@ extends CharacterBody2D
 signal shoot # handles bullet firing 
 signal health_changed # handles any changes to health
 signal dead # handles death
+signal update_dmg # updates bullet damage
+signal update_spd # updates bullet speed
 
 # Export variables are visible/modifiable in the Inspector
 # Inspector value takes priority over code value
@@ -39,6 +41,7 @@ func control(_delta: float) -> void:
 func take_damage(amount: float) -> void:
 	health -= amount
 	emit_signal("health_changed", health * 100/max_health)
+	print(health)
 	if health <= 0:
 		explode()
 

@@ -12,6 +12,8 @@ func _ready() -> void:
 	set_camera_limits()
 	add_enemies()
 	enemy_count = get_tree().get_nodes_in_group("Enemy").size()
+	set_player_stats()
+	$Player.upgrades_done.connect(_on_upgrade_timer_timeout)
 	$Player/HUD.update_score(enemy_count)
 	$Player/HUD.update_level(Globals.enemy_level + 1)
 
@@ -47,6 +49,16 @@ func add_enemies():
 		
 	print(Globals.enemy_level)
 
+func set_player_stats():
+	$Player.update_damage(Globals.player_stats["gun_damage"])
+	$Player.gun_cooldown = Globals.player_stats["gun_cooldown"]
+	$Player.update_damage(Globals.player_stats["gun_speed"])
+	$Player.max_health = Globals.player_stats["hp"]
+	$Player.health = $Player.max_health
+	$Player.max_speed = Globals.player_stats["tank_speed"]
+	$Player.max_rotation_speed = Globals.player_stats["rotate_speed"]
+
+
 func _on_Tank_shoot(bullet, _position, _direction):
 	var b = bullet.instantiate()
 	add_child(b)
@@ -62,10 +74,15 @@ func _on_enemy_dead():
 	$Player/HUD.update_score(enemy_count)
 	
 	if enemy_count == 0:
+		$Player.can_control = false
 		$Player/HUD/Message.show()
 		$ProgessTimer.start()
 
 
 func _on_progress_timer_timeout() -> void:
 	$Player/HUD/Message.hide()
+	$Player/HUD/UpgradeWindow.show()
+
+
+func _on_upgrade_timer_timeout() -> void:
 	Globals.adv_enemy_level()

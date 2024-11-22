@@ -1,7 +1,7 @@
 extends "res://scripts/base_classes/bullet.gd"
 
 func _ready() -> void:
-	damage = damage + (1 * Globals.enemy_level)
+	damage += (1 * Globals.enemy_level)
 	if Globals.enemy_level%5 == 0:
 		damage += 5
 
@@ -15,5 +15,6 @@ func _on_area_entered(area: Area2D) -> void:
 				# Assuming the parent of the Area2D has a take_damage method
 					if area.get_parent().has_method("take_damage"):
 						area.get_parent().take_damage(damage)
+						area.get_parent().get_node("DamagedSound").play()
 						explode()
 						

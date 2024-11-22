@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bk06uui08myjf"]
+[gd_scene load_steps=15 format=3 uid="uid://bk06uui08myjf"]
 
 [ext_resource type="PackedScene" uid="uid://bgaadtx5bln0a" path="res://scenes/base_classes/tank.tscn" id="1_rx8kj"]
 [ext_resource type="Script" path="res://scripts/enemy/enemy_tank.gd" id="2_00rm4"]
@@ -6,12 +6,15 @@
 [ext_resource type="Texture2D" uid="uid://dfndceesq6kcx" path="res://sprites/tank_bodies/enemy_tank_body_2.png" id="3_h8jbx"]
 [ext_resource type="Texture2D" uid="uid://blx55e40qljvw" path="res://sprites/tank_bodies/enemy_tank_canon_2.png" id="4_lny0q"]
 [ext_resource type="PackedScene" uid="uid://bdgfouvkixk75" path="res://scenes/ui/enemy_display.tscn" id="5_8727m"]
+[ext_resource type="AudioStream" uid="uid://dn778l8vfvcgo" path="res://sounds/generic/enemy_shoot.WAV" id="7_d0lko"]
+[ext_resource type="AudioStream" uid="uid://dscqp8itiw5n4" path="res://sounds/generic/player_damage_sound.wav" id="8_feen1"]
+[ext_resource type="AudioStream" uid="uid://cldn0ev81032y" path="res://sounds/generic/armor_sound.wav" id="8_xl577"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pojde"]
-size = Vector2(147, 78)
+size = Vector2(146, 78)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ssgt2"]
-size = Vector2(24, 68)
+size = Vector2(25, 68)
 
 [sub_resource type="Animation" id="Animation_ws844"]
 length = 0.001
@@ -74,11 +77,11 @@ offset = Vector2(160, 20)
 position = Vector2(520, 20)
 
 [node name="BodyCollision" parent="." index="2"]
-position = Vector2(1.5, 0)
+position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_pojde")
 
 [node name="bullet_collision" parent="BulletDetect" index="0"]
-position = Vector2(62, 0)
+position = Vector2(62.5, 0)
 shape = SubResource("RectangleShape2D_ssgt2")
 debug_color = Color(0.878431, 0.317647, 0.317647, 0.419608)
 
@@ -115,40 +118,22 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="left_side" type="ColorRect" parent="VisualHitboxes" index="0"]
-visible = false
-layout_mode = 0
-offset_left = -67.0
-offset_top = -39.0
-offset_right = 72.0
-offset_bottom = -33.0
-color = Color(0.282353, 0.615686, 0.803922, 0.588235)
-
-[node name="front" type="ColorRect" parent="VisualHitboxes" index="1"]
+[node name="front" type="ColorRect" parent="VisualHitboxes" index="0"]
 layout_mode = 0
 offset_left = 50.0
 offset_top = -34.0
-offset_right = 74.0
+offset_right = 75.0
 offset_bottom = 34.0
 color = Color(1, 0.27451, 0.215686, 0.345098)
 
-[node name="right_side" type="ColorRect" parent="VisualHitboxes" index="2"]
-visible = false
-layout_mode = 0
-offset_left = -67.0
-offset_top = 35.0
-offset_right = 72.0
-offset_bottom = 39.0
-color = Color(0.282353, 0.615686, 0.803922, 0.588235)
+[node name="ShootSound" type="AudioStreamPlayer" parent="." index="13"]
+stream = ExtResource("7_d0lko")
 
-[node name="back" type="ColorRect" parent="VisualHitboxes" index="3"]
-visible = false
-layout_mode = 0
-offset_left = -72.0
-offset_top = -39.0
-offset_right = -67.0
-offset_bottom = 39.0
-color = Color(0.282353, 0.615686, 0.803922, 0.588235)
+[node name="ArmorSound" parent="." index="14"]
+stream = ExtResource("8_xl577")
+
+[node name="DamagedSound" parent="." index="15"]
+stream = ExtResource("8_feen1")
 
 [connection signal="health_changed" from="." to="EnemyDisplay" method="update_healthbar"]
 [connection signal="body_entered" from="DetectRadius" to="." method="_on_detect_radius_body_entered"]

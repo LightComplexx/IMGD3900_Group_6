@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cydf7xikx1tn6"]
+[gd_scene load_steps=18 format=3 uid="uid://cydf7xikx1tn6"]
 
 [ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_s2x4c"]
 [ext_resource type="Texture2D" uid="uid://b5e0g1g2oufx2" path="res://sprites/ui/mini_map.png" id="2_07u67"]
@@ -9,6 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://bxs2hvfruhf01" path="res://sprites/ui/health_bar_yellow.png" id="5_t5ujx"]
 [ext_resource type="FontFile" uid="uid://b0gmlnwtrr3e6" path="res://fonts/Kenney Future.ttf" id="6_vmtmu"]
 [ext_resource type="Texture2D" uid="uid://co8e5ifgrcga" path="res://sprites/ui/cursor.png" id="9_ok788"]
+[ext_resource type="Texture2D" uid="uid://b2f2t1hve371p" path="res://sprites/tank_guns/base_gun.png" id="10_3o8in"]
+[ext_resource type="Texture2D" uid="uid://c4ucoxx7s0hog" path="res://sprites/tank_bodies/tankonly_pixel.png" id="11_a6fcq"]
+[ext_resource type="ButtonGroup" uid="uid://2ma33ifwwgfh" path="res://resources/gun_upgrade_buttons.tres" id="11_kg3oh"]
+[ext_resource type="Texture2D" uid="uid://brvq67dvr2sj5" path="res://sprites/ui/upgrade.png" id="11_yu7im"]
+[ext_resource type="ButtonGroup" uid="uid://5xff3x3fuptp" path="res://resources/tank_upgrade_buttons.tres" id="14_w8b0c"]
 
 [sub_resource type="Animation" id="Animation_yduuo"]
 length = 0.001
@@ -50,23 +55,6 @@ _data = {
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_s2x4c")
-
-[node name="Message" type="ColorRect" parent="."]
-visible = false
-offset_right = 1080.0
-offset_bottom = 720.0
-color = Color(0.384314, 0.384314, 0.384314, 0.454902)
-
-[node name="Label" type="Label" parent="Message"]
-layout_mode = 2
-offset_top = 311.0
-offset_right = 1040.0
-offset_bottom = 368.0
-theme_override_fonts/font = ExtResource("6_vmtmu")
-theme_override_font_sizes/font_size = 50
-text = "ALL ENEMIES DEFEATED!!!"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Margin" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -164,4 +152,248 @@ position = Vector2(52, 48)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("9_ok788")
 
+[node name="Message" type="ColorRect" parent="."]
+visible = false
+offset_right = 1080.0
+offset_bottom = 720.0
+color = Color(0.384314, 0.384314, 0.384314, 0.454902)
+
+[node name="Label" type="Label" parent="Message"]
+layout_mode = 2
+offset_top = 311.0
+offset_right = 1040.0
+offset_bottom = 368.0
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 50
+text = "ALL ENEMIES DEFEATED!!!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeWindow" type="ColorRect" parent="."]
+visible = false
+offset_right = 1080.0
+offset_bottom = 720.0
+color = Color(0.12549, 0.12549, 0.12549, 0.721569)
+
+[node name="text" type="Label" parent="UpgradeWindow"]
+layout_mode = 0
+offset_left = 179.0
+offset_top = 74.0
+offset_right = 885.0
+offset_bottom = 167.0
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 40
+text = "CHOOSE YOUR UPGRADES !!!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="gun_sprite" type="Sprite2D" parent="UpgradeWindow"]
+position = Vector2(289, 294.4)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("10_3o8in")
+
+[node name="atk_button" type="Button" parent="UpgradeWindow"]
+offset_left = 121.0
+offset_top = 422.4
+offset_right = 448.0
+offset_bottom = 453.4
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 20
+toggle_mode = true
+keep_pressed_outside = true
+button_group = ExtResource("11_kg3oh")
+text = "Attack"
+alignment = 0
+icon_alignment = 2
+expand_icon = true
+
+[node name="upgrade" type="Sprite2D" parent="UpgradeWindow/atk_button"]
+modulate = Color(0.208731, 0.868457, 0.161045, 1)
+position = Vector2(312, 18)
+rotation = 0.785398
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("11_yu7im")
+
+[node name="num" type="Label" parent="UpgradeWindow/atk_button"]
+layout_mode = 0
+offset_left = 286.0
+offset_top = 3.60001
+offset_right = 303.0
+offset_bottom = 26.6
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 20
+text = "3"
+
+[node name="fire_button" type="Button" parent="UpgradeWindow"]
+offset_left = 121.0
+offset_top = 494.4
+offset_right = 448.0
+offset_bottom = 525.4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 20
+toggle_mode = true
+keep_pressed_outside = true
+button_group = ExtResource("11_kg3oh")
+text = "Fire Cooldown"
+alignment = 0
+
+[node name="upgrade2" type="Sprite2D" parent="UpgradeWindow/fire_button"]
+modulate = Color(0.0588235, 0.596078, 1, 1)
+position = Vector2(313, 13)
+rotation = 3.92699
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("11_yu7im")
+
+[node name="num2" type="Label" parent="UpgradeWindow/fire_button"]
+layout_mode = 0
+offset_left = 270.0
+offset_top = 3.60001
+offset_right = 303.0
+offset_bottom = 26.6
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 20
+text = ".01"
+
+[node name="spd_button" type="Button" parent="UpgradeWindow"]
+offset_left = 121.0
+offset_top = 566.4
+offset_right = 448.0
+offset_bottom = 597.4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 20
+toggle_mode = true
+keep_pressed_outside = true
+button_group = ExtResource("11_kg3oh")
+text = "Bullet Speed"
+alignment = 0
+
+[node name="upgrade3" type="Sprite2D" parent="UpgradeWindow/spd_button"]
+modulate = Color(0.208731, 0.868457, 0.161045, 1)
+position = Vector2(313, 18)
+rotation = 0.785398
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("11_yu7im")
+
+[node name="num3" type="Label" parent="UpgradeWindow/spd_button"]
+layout_mode = 0
+offset_left = 270.0
+offset_top = 3.59998
+offset_right = 303.0
+offset_bottom = 26.6
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 20
+text = "25"
+
+[node name="tank_sprite" type="Sprite2D" parent="UpgradeWindow"]
+position = Vector2(757, 286)
+texture = ExtResource("11_a6fcq")
+
+[node name="hp_button" type="Button" parent="UpgradeWindow"]
+layout_mode = 0
+offset_left = 611.0
+offset_top = 422.0
+offset_right = 938.0
+offset_bottom = 453.0
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 20
+toggle_mode = true
+keep_pressed_outside = true
+button_group = ExtResource("14_w8b0c")
+text = "HP"
+alignment = 0
+
+[node name="upgrade2" type="Sprite2D" parent="UpgradeWindow/hp_button"]
+modulate = Color(0.208731, 0.868457, 0.161045, 1)
+position = Vector2(311, 18)
+rotation = 0.785398
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("11_yu7im")
+
+[node name="num4" type="Label" parent="UpgradeWindow/hp_button"]
+layout_mode = 0
+offset_left = 284.0
+offset_top = 4.0
+offset_right = 318.0
+offset_bottom = 27.0
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 20
+text = "5"
+
+[node name="move_button" type="Button" parent="UpgradeWindow"]
+layout_mode = 0
+offset_left = 611.0
+offset_top = 494.0
+offset_right = 938.0
+offset_bottom = 525.0
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 20
+toggle_mode = true
+keep_pressed_outside = true
+button_group = ExtResource("14_w8b0c")
+text = "Move Speed"
+alignment = 0
+
+[node name="upgrade2" type="Sprite2D" parent="UpgradeWindow/move_button"]
+modulate = Color(0.208731, 0.868457, 0.161045, 1)
+position = Vector2(312, 19)
+rotation = 0.785398
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("11_yu7im")
+
+[node name="num5" type="Label" parent="UpgradeWindow/move_button"]
+layout_mode = 0
+offset_left = 270.0
+offset_top = 4.0
+offset_right = 304.0
+offset_bottom = 27.0
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 20
+text = "20"
+
+[node name="rotate_button" type="Button" parent="UpgradeWindow"]
+layout_mode = 0
+offset_left = 611.0
+offset_top = 566.0
+offset_right = 938.0
+offset_bottom = 597.0
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 18
+toggle_mode = true
+keep_pressed_outside = true
+button_group = ExtResource("14_w8b0c")
+text = "Rotate Speed"
+alignment = 0
+
+[node name="upgrade2" type="Sprite2D" parent="UpgradeWindow/rotate_button"]
+modulate = Color(0.208731, 0.868457, 0.161045, 1)
+position = Vector2(313, 18)
+rotation = 0.785398
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("11_yu7im")
+
+[node name="num6" type="Label" parent="UpgradeWindow/rotate_button"]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 4.0
+offset_right = 304.0
+offset_bottom = 27.0
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 20
+text = "0.2"
+
+[node name="Confirm" type="Button" parent="UpgradeWindow"]
+visible = false
+layout_mode = 0
+offset_left = 391.0
+offset_top = 640.0
+offset_right = 687.0
+offset_bottom = 693.0
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 40
+text = "Confirm"
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="pressed" from="UpgradeWindow/Confirm" to="." method="_on_confirm_pressed"]
