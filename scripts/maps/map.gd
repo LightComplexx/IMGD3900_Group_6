@@ -45,9 +45,6 @@ func add_enemies():
 		enemy.position_markers.append(Vector2(randi_range(60, 4400), randi_range(60, 1600)))
 		enemy.position_markers.append(Vector2(randi_range(60, 4400), randi_range(60, 1600)))
 		
-		# Set enemy variables if needed
-		enemy.max_health = 100 + (10 * Globals.enemy_level%2)
-		
 		# Spawn the mob by adding it to the Main scene.
 		add_child(enemy)
 		

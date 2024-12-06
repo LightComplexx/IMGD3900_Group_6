@@ -41,7 +41,6 @@ func control(_delta: float) -> void:
 func take_damage(amount: float) -> void:
 	health -= amount
 	emit_signal("health_changed", health * 100/max_health)
-	print(health)
 	if health <= 0:
 		explode()
 

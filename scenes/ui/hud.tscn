@@ -141,8 +141,10 @@ render_target_update_mode = 4
 script = ExtResource("2_ji5lw")
 
 [node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport"]
+zoom = Vector2(0.5, 0.5)
 
 [node name="Minimap" type="Sprite2D" parent="SubViewportContainer/SubViewport"]
+scale = Vector2(2.7, 2.7)
 texture = ExtResource("2_07u67")
 centered = false
 
@@ -187,24 +189,60 @@ text = "CHOOSE YOUR UPGRADES !!!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="tank_sprite" type="Sprite2D" parent="UpgradeWindow"]
+position = Vector2(757, 286)
+texture = ExtResource("11_a6fcq")
+
 [node name="gun_sprite" type="Sprite2D" parent="UpgradeWindow"]
-position = Vector2(289, 294.4)
-scale = Vector2(0.8, 0.8)
+position = Vector2(764, 283)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("10_3o8in")
+
+[node name="hp_button" type="Button" parent="UpgradeWindow"]
+layout_mode = 0
+offset_left = 611.0
+offset_top = 422.0
+offset_right = 938.0
+offset_bottom = 453.0
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 20
+toggle_mode = true
+keep_pressed_outside = true
+button_group = ExtResource("14_w8b0c")
+text = " HP"
+alignment = 0
+
+[node name="upgrade2" type="Sprite2D" parent="UpgradeWindow/hp_button"]
+modulate = Color(0.208731, 0.868457, 0.161045, 1)
+position = Vector2(312, 18)
+rotation = 0.785398
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("11_yu7im")
+
+[node name="num4" type="Label" parent="UpgradeWindow/hp_button"]
+layout_mode = 0
+offset_left = 269.0
+offset_top = 4.0
+offset_right = 303.0
+offset_bottom = 27.0
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 20
+text = "10"
+horizontal_alignment = 2
 
 [node name="atk_button" type="Button" parent="UpgradeWindow"]
 layout_mode = 0
-offset_left = 121.0
-offset_top = 422.4
-offset_right = 448.0
-offset_bottom = 453.4
+offset_left = 611.0
+offset_top = 494.0
+offset_right = 938.0
+offset_bottom = 525.0
 size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("6_vmtmu")
 theme_override_font_sizes/font_size = 20
 toggle_mode = true
 keep_pressed_outside = true
-button_group = ExtResource("11_kg3oh")
-text = "Attack"
+button_group = ExtResource("14_w8b0c")
+text = " Attack"
 alignment = 0
 icon_alignment = 2
 expand_icon = true
@@ -218,52 +256,65 @@ texture = ExtResource("11_yu7im")
 
 [node name="num" type="Label" parent="UpgradeWindow/atk_button"]
 layout_mode = 0
-offset_left = 286.0
-offset_top = 3.60001
+offset_left = 274.0
+offset_top = 4.0
 offset_right = 303.0
-offset_bottom = 26.6
+offset_bottom = 27.0
 theme_override_fonts/font = ExtResource("6_vmtmu")
 theme_override_font_sizes/font_size = 20
-text = "3"
+text = "5"
+horizontal_alignment = 2
 
-[node name="fire_button" type="Button" parent="UpgradeWindow"]
+[node name="move_button" type="Button" parent="UpgradeWindow"]
 layout_mode = 0
-offset_left = 121.0
-offset_top = 494.4
-offset_right = 448.0
-offset_bottom = 525.4
-size_flags_vertical = 4
+offset_left = 611.0
+offset_top = 566.0
+offset_right = 938.0
+offset_bottom = 597.0
 theme_override_fonts/font = ExtResource("6_vmtmu")
 theme_override_font_sizes/font_size = 20
 toggle_mode = true
 keep_pressed_outside = true
-button_group = ExtResource("11_kg3oh")
-text = "Fire Cooldown"
+button_group = ExtResource("14_w8b0c")
+text = " Move Speed"
 alignment = 0
 
-[node name="upgrade2" type="Sprite2D" parent="UpgradeWindow/fire_button"]
-modulate = Color(0.0588235, 0.596078, 1, 1)
-position = Vector2(313, 13)
-rotation = 3.92699
+[node name="upgrade2" type="Sprite2D" parent="UpgradeWindow/move_button"]
+modulate = Color(0.208731, 0.868457, 0.161045, 1)
+position = Vector2(313, 18)
+rotation = 0.785398
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("11_yu7im")
 
-[node name="num2" type="Label" parent="UpgradeWindow/fire_button"]
+[node name="num5" type="Label" parent="UpgradeWindow/move_button"]
 layout_mode = 0
-offset_left = 270.0
-offset_top = 3.60001
-offset_right = 303.0
-offset_bottom = 26.6
+offset_left = 257.0
+offset_top = 4.0
+offset_right = 304.0
+offset_bottom = 27.0
 theme_override_fonts/font = ExtResource("6_vmtmu")
 theme_override_font_sizes/font_size = 20
-text = ".01"
+text = "20"
+horizontal_alignment = 2
+
+[node name="Confirm" type="Button" parent="UpgradeWindow"]
+visible = false
+layout_mode = 0
+offset_left = 391.0
+offset_top = 640.0
+offset_right = 687.0
+offset_bottom = 693.0
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 40
+text = "Confirm"
 
 [node name="spd_button" type="Button" parent="UpgradeWindow"]
+visible = false
 layout_mode = 0
 offset_left = 121.0
-offset_top = 566.4
+offset_top = 538.0
 offset_right = 448.0
-offset_bottom = 597.4
+offset_bottom = 569.0
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("6_vmtmu")
 theme_override_font_sizes/font_size = 20
@@ -290,78 +341,46 @@ theme_override_fonts/font = ExtResource("6_vmtmu")
 theme_override_font_sizes/font_size = 20
 text = "25"
 
-[node name="tank_sprite" type="Sprite2D" parent="UpgradeWindow"]
-position = Vector2(757, 286)
-texture = ExtResource("11_a6fcq")
-
-[node name="hp_button" type="Button" parent="UpgradeWindow"]
+[node name="fire_button" type="Button" parent="UpgradeWindow"]
+visible = false
 layout_mode = 0
-offset_left = 611.0
-offset_top = 422.0
-offset_right = 938.0
-offset_bottom = 453.0
+offset_left = 121.0
+offset_top = 507.0
+offset_right = 448.0
+offset_bottom = 538.0
+size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("6_vmtmu")
 theme_override_font_sizes/font_size = 20
 toggle_mode = true
 keep_pressed_outside = true
-button_group = ExtResource("14_w8b0c")
-text = "HP"
+button_group = ExtResource("11_kg3oh")
+text = "Fire Cooldown"
 alignment = 0
 
-[node name="upgrade2" type="Sprite2D" parent="UpgradeWindow/hp_button"]
-modulate = Color(0.208731, 0.868457, 0.161045, 1)
-position = Vector2(311, 18)
-rotation = 0.785398
+[node name="upgrade2" type="Sprite2D" parent="UpgradeWindow/fire_button"]
+modulate = Color(0.0588235, 0.596078, 1, 1)
+position = Vector2(313, 13)
+rotation = 3.92699
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("11_yu7im")
 
-[node name="num4" type="Label" parent="UpgradeWindow/hp_button"]
-layout_mode = 0
-offset_left = 284.0
-offset_top = 4.0
-offset_right = 318.0
-offset_bottom = 27.0
-theme_override_fonts/font = ExtResource("6_vmtmu")
-theme_override_font_sizes/font_size = 20
-text = "5"
-
-[node name="move_button" type="Button" parent="UpgradeWindow"]
-layout_mode = 0
-offset_left = 611.0
-offset_top = 494.0
-offset_right = 938.0
-offset_bottom = 525.0
-theme_override_fonts/font = ExtResource("6_vmtmu")
-theme_override_font_sizes/font_size = 20
-toggle_mode = true
-keep_pressed_outside = true
-button_group = ExtResource("14_w8b0c")
-text = "Move Speed"
-alignment = 0
-
-[node name="upgrade2" type="Sprite2D" parent="UpgradeWindow/move_button"]
-modulate = Color(0.208731, 0.868457, 0.161045, 1)
-position = Vector2(312, 19)
-rotation = 0.785398
-scale = Vector2(0.35, 0.35)
-texture = ExtResource("11_yu7im")
-
-[node name="num5" type="Label" parent="UpgradeWindow/move_button"]
+[node name="num2" type="Label" parent="UpgradeWindow/fire_button"]
 layout_mode = 0
 offset_left = 270.0
-offset_top = 4.0
-offset_right = 304.0
-offset_bottom = 27.0
+offset_top = 3.60001
+offset_right = 303.0
+offset_bottom = 26.6
 theme_override_fonts/font = ExtResource("6_vmtmu")
 theme_override_font_sizes/font_size = 20
-text = "20"
+text = ".01"
 
 [node name="rotate_button" type="Button" parent="UpgradeWindow"]
+visible = false
 layout_mode = 0
-offset_left = 611.0
-offset_top = 566.0
-offset_right = 938.0
-offset_bottom = 597.0
+offset_left = 121.0
+offset_top = 476.0
+offset_right = 448.0
+offset_bottom = 507.0
 theme_override_fonts/font = ExtResource("6_vmtmu")
 theme_override_font_sizes/font_size = 18
 toggle_mode = true
@@ -387,16 +406,72 @@ theme_override_fonts/font = ExtResource("6_vmtmu")
 theme_override_font_sizes/font_size = 20
 text = "0.2"
 
-[node name="Confirm" type="Button" parent="UpgradeWindow"]
-visible = false
+[node name="StatWindow" type="ColorRect" parent="UpgradeWindow"]
 layout_mode = 0
-offset_left = 391.0
-offset_top = 640.0
-offset_right = 687.0
-offset_bottom = 693.0
+offset_left = 105.0
+offset_top = 208.0
+offset_right = 497.0
+offset_bottom = 611.0
+color = Color(0.0807833, 0.0807833, 0.0807833, 0.721569)
+
+[node name="stats" type="Label" parent="UpgradeWindow/StatWindow"]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 11.0
+offset_right = 347.0
+offset_bottom = 47.0
 theme_override_fonts/font = ExtResource("6_vmtmu")
-theme_override_font_sizes/font_size = 40
-text = "Confirm"
+theme_override_font_sizes/font_size = 30
+text = "Player Stats:"
+
+[node name="stats_list" type="Label" parent="UpgradeWindow/StatWindow"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 65.0
+offset_right = 370.0
+offset_bottom = 381.0
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 22
+text = "upgradable
+HP:
+Attack:
+Tank Speed:
+
+
+Non-upgradable
+Turn Force:  4
+Bullet Speed:  25
+Gun Cooldown:  0.25 sec"
+
+[node name="hp_num" type="Label" parent="UpgradeWindow/StatWindow"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 94.0
+offset_right = 108.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 22
+text = "0"
+
+[node name="atk_num" type="Label" parent="UpgradeWindow/StatWindow"]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 123.0
+offset_right = 184.0
+offset_bottom = 149.0
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 22
+text = "0"
+
+[node name="spd_num" type="Label" parent="UpgradeWindow/StatWindow"]
+layout_mode = 0
+offset_left = 205.0
+offset_top = 152.0
+offset_right = 245.0
+offset_bottom = 178.0
+theme_override_fonts/font = ExtResource("6_vmtmu")
+theme_override_font_sizes/font_size = 22
+text = "0"
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="pressed" from="UpgradeWindow/Confirm" to="." method="_on_confirm_pressed"]

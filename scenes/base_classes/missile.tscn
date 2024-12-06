@@ -12,6 +12,7 @@ collision_layer = 4
 collision_mask = 3
 script = ExtResource("2_jwf14")
 speed = 600
+lifetime = 4
 steer_force = 25
 
 [node name="Sprite2D" parent="." index="0"]

@@ -8,21 +8,33 @@ var current_marker_index: int = 0
 var player = null
 var speed = 0.0
 var bullets_fired = 0
-const BULLETS_PER_BURST = 2
+var bullets_per_burst = 2
 var waiting_for_anim = false
 
 func _ready() -> void:
+	# set position to first marker
 	if position_markers.size() > 0:
 		position = position_markers[0]
 	
+	# set detect radius
 	var circle = CircleShape2D.new()
 	$DetectRadius/CollisionShape2D.shape = circle
 	$DetectRadius/CollisionShape2D.shape.radius = detect_radius
-	health = max_health
-	speed = max_speed
-	emit_signal("health_changed", health * 100/max_health)
+	
+	# set gun/bullet timers
 	$GunTimer.wait_time = gun_cooldown
 	$BulletIntervalTimer.wait_time = bullet_interval
+	
+	# property changes by wave
+	max_health = 100 + (40 * Globals.enemy_level)
+	max_speed = 250.0 + (20.0 * Globals.enemy_level)
+	health = max_health
+	speed = max_speed
+	if Globals.enemy_level > 5:
+		bullets_per_burst += 1 * Globals.enemy_level%2
+	
+	# set signals
+	emit_signal("health_changed", health * 100/max_health)
 
 func control(_delta):
 	if position_markers.size() < 2:
@@ -71,6 +83,7 @@ func _on_detect_radius_body_exited(body: Node2D) -> void:
 		
 
 func explode() -> void:
+	$BodyCollision.set_deferred("disabled", true)
 	$BulletDetect/bullet_collision.set_deferred("disabled", true)
 	$BodyDetection/detection_shape.set_deferred("disabled", true)
 	alive = false
@@ -83,7 +96,7 @@ func explode() -> void:
 	emit_signal("dead")
 
 func _on_bullet_interval_timer_timeout() -> void:
-	if bullets_fired < BULLETS_PER_BURST and alive and not waiting_for_anim:
+	if bullets_fired < bullets_per_burst and alive and not waiting_for_anim:
 		var dir = Vector2(1, 0).rotated($Turret.global_rotation)
 		var temp_target
 		var position1 = Vector2($Turret/Muzzle.global_position.x, $Turret/Muzzle.global_position.y - 18)
@@ -99,7 +112,7 @@ func _on_bullet_interval_timer_timeout() -> void:
 		bullets_fired += 1
 
 		# Schedule the next shot if needed
-		if bullets_fired < BULLETS_PER_BURST:
+		if bullets_fired < bullets_per_burst:
 			$BulletIntervalTimer.start()  # Start interval for the next shot
 		else:
 			# After the last shot, start the cooldown timer

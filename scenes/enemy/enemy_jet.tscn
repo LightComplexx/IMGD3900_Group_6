@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cvy87p3ovsveb"]
+[gd_scene load_steps=11 format=3 uid="uid://cvy87p3ovsveb"]
 
 [ext_resource type="PackedScene" uid="uid://bgaadtx5bln0a" path="res://scenes/base_classes/tank.tscn" id="1_i78nk"]
 [ext_resource type="Texture2D" uid="uid://cehde0rc7edgg" path="res://sprites/tank_bodies/enemy_jet.png" id="2_bht61"]
@@ -7,9 +7,6 @@
 [ext_resource type="AudioStream" uid="uid://cldn0ev81032y" path="res://sounds/generic/armor_sound.wav" id="4_ce7vl"]
 [ext_resource type="AudioStream" uid="uid://edhnibbh25ji" path="res://sounds/generic/jet_damage.wav" id="4_d8bt2"]
 [ext_resource type="PackedScene" uid="uid://bdgfouvkixk75" path="res://scenes/ui/enemy_display.tscn" id="7_wx3mj"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_iemj4"]
-size = Vector2(12, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1skjk"]
 size = Vector2(20, 12)
@@ -37,6 +34,7 @@ _data = {
 [node name="Tank" groups=["Enemy"] instance=ExtResource("1_i78nk")]
 collision_layer = 4
 collision_mask = 3
+motion_mode = 1
 script = ExtResource("2_nonu5")
 detect_radius = 500
 bullet_interval = 0.3
@@ -52,10 +50,6 @@ texture = ExtResource("2_bht61")
 
 [node name="Muzzle" parent="Turret" index="0"]
 position = Vector2(3.68, 0)
-
-[node name="BodyCollision" parent="." index="2"]
-visible = false
-shape = SubResource("RectangleShape2D_iemj4")
 
 [node name="BulletDetect" parent="." index="3"]
 visible = false
