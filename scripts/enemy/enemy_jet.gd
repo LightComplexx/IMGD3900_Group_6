@@ -30,12 +30,7 @@ func control(_delta):
 
 	# Determine target based on is_aggro state
 	var target_position: Vector2
-	if player:
-		# If player in aggro range, set target to player’s position
-		target_position = player.position # Assumes player has a position variable
-	else:
-		# Otherwise, continue moving toward current marker
-		target_position = position_markers[current_marker_index]
+	target_position = position_markers[current_marker_index]
 	
 	var current_dir = Vector2(1, 0).rotated(rotation)
 	var target_dir = (target_position - position).normalized()
@@ -43,12 +38,9 @@ func control(_delta):
 	if target_dir.dot(current_dir) > 0.9:
 		if player:
 			_on_shoot(player)
-			if position.distance_to(target_position) > 10.0:
-				velocity = current_dir * speed/2
-				move_and_slide()
-		else:
-			velocity = current_dir * speed
-			move_and_slide()
+	
+	velocity = current_dir * speed
+	move_and_slide()
 	
 	# Rotate to face the target position
 	var target_angle = target_dir.angle()

@@ -43,7 +43,7 @@ bullet_interval = 0.3
 position_markers = Array[Vector2]([])
 Bullet = ExtResource("3_didfs")
 max_speed = 250.0
-gun_cooldown = 1.0
+gun_cooldown = 0.8
 metadata/_edit_group_ = true
 
 [node name="TankBody" parent="." index="0"]
