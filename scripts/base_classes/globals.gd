@@ -22,7 +22,8 @@ func next_scene():
 
 
 func adv_enemy_level():
-	enemy_level += 1
+	if enemy_level < 20:
+		enemy_level += 1
 	get_tree().change_scene_to_file(levels[1])
 
 func reset_player_stats():

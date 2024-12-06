@@ -70,7 +70,7 @@ func control(_delta):
 		# Switch to the next marker if not in aggro state
 		current_marker_index = (current_marker_index + 1) % position_markers.size()
 
-func _on_shoot() -> void:
+func _on_shoot(target = null) -> void:
 	if can_shoot and not waiting_for_anim:
 		can_shoot = false
 		bullets_fired = 0  # Reset bullet count
@@ -103,9 +103,8 @@ func explode() -> void:
 func _on_bullet_interval_timer_timeout() -> void:
 	if bullets_fired < BULLETS_PER_BURST and alive and not waiting_for_anim:
 		var dir = Vector2(1, 0).rotated($Turret.global_rotation)
-		emit_signal("shoot", Bullet, $Turret/Muzzle.global_position, dir)
+		emit_signal("shoot", Bullet, $Turret/Muzzle.global_position, dir, null)
 		$ShootSound.play()
-		#$Turret.move_local_x(-10)
 		bullets_fired += 1
 
 		# Schedule the next shot if needed

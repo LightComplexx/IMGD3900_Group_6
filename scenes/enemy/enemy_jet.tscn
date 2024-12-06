@@ -1,0 +1,97 @@
+[gd_scene load_steps=12 format=3 uid="uid://cvy87p3ovsveb"]
+
+[ext_resource type="PackedScene" uid="uid://bgaadtx5bln0a" path="res://scenes/base_classes/tank.tscn" id="1_i78nk"]
+[ext_resource type="Texture2D" uid="uid://cehde0rc7edgg" path="res://sprites/tank_bodies/enemy_jet.png" id="2_bht61"]
+[ext_resource type="Script" path="res://scripts/enemy/enemy_jet.gd" id="2_nonu5"]
+[ext_resource type="PackedScene" uid="uid://yy85f4bco5o6" path="res://scenes/base_classes/missile.tscn" id="3_didfs"]
+[ext_resource type="AudioStream" uid="uid://cldn0ev81032y" path="res://sounds/generic/armor_sound.wav" id="4_ce7vl"]
+[ext_resource type="AudioStream" uid="uid://edhnibbh25ji" path="res://sounds/generic/jet_damage.wav" id="4_d8bt2"]
+[ext_resource type="PackedScene" uid="uid://bdgfouvkixk75" path="res://scenes/ui/enemy_display.tscn" id="7_wx3mj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iemj4"]
+size = Vector2(12, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1skjk"]
+size = Vector2(20, 12)
+
+[sub_resource type="Animation" id="Animation_is6n2"]
+resource_name = "shoot_signal"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TankBody:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.545098, 0.933333, 0, 1), Color(1, 1, 1, 1), Color(0.545098, 0.933333, 0, 1), Color(1, 1, 1, 1), Color(0.545098, 0.933333, 0, 1), Color(1, 1, 1, 1), Color(0.545098, 0.933333, 0, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fbj4m"]
+_data = {
+"shoot_signal": SubResource("Animation_is6n2")
+}
+
+[node name="Tank" groups=["Enemy"] instance=ExtResource("1_i78nk")]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("2_nonu5")
+detect_radius = 500
+bullet_interval = 0.3
+position_markers = Array[Vector2]([])
+Bullet = ExtResource("3_didfs")
+max_speed = 250.0
+gun_cooldown = 1.0
+metadata/_edit_group_ = true
+
+[node name="TankBody" parent="." index="0"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_bht61")
+
+[node name="Muzzle" parent="Turret" index="0"]
+position = Vector2(3.68, 0)
+
+[node name="BodyCollision" parent="." index="2"]
+visible = false
+shape = SubResource("RectangleShape2D_iemj4")
+
+[node name="BulletDetect" parent="." index="3"]
+visible = false
+
+[node name="bullet_collision" parent="BulletDetect" index="0"]
+shape = SubResource("RectangleShape2D_1skjk")
+
+[node name="ArmorSound" parent="." index="6"]
+stream = ExtResource("4_ce7vl")
+
+[node name="DamagedSound" parent="." index="7"]
+stream = ExtResource("4_d8bt2")
+
+[node name="EnemyDisplay" parent="." index="8" instance=ExtResource("7_wx3mj")]
+
+[node name="BodyDetection" type="Area2D" parent="." index="9"]
+
+[node name="detection_shape" type="CollisionPolygon2D" parent="BodyDetection" index="0"]
+position = Vector2(-77, -1)
+polygon = PackedVector2Array(139, -2, 94, -8, 80, -13, 52, -44, 40, -44, 47, -16, 39, -18, 28, -29, 23, -28, 23, -1, 13, -1, 13, 4, 23, 4, 23, 12, 23, 30, 28, 32, 40, 21, 43, 19, 47, 19, 41, 46, 53, 46, 84, 14, 100, 10, 139, 4, 143, 1)
+
+[node name="DetectRadius" type="Area2D" parent="." index="10"]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRadius" index="0"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="11"]
+libraries = {
+"": SubResource("AnimationLibrary_fbj4m")
+}
+
+[node name="BulletIntervalTimer" type="Timer" parent="." index="12"]
+
+[connection signal="health_changed" from="." to="EnemyDisplay" method="update_healthbar"]
+[connection signal="body_entered" from="DetectRadius" to="." method="_on_detect_radius_body_entered"]
+[connection signal="body_exited" from="DetectRadius" to="." method="_on_detect_radius_body_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="BulletIntervalTimer" to="." method="_on_bullet_interval_timer_timeout"]

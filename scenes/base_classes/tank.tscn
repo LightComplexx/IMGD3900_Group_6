@@ -62,6 +62,7 @@ script = ExtResource("1_hiiss")
 [node name="bullet_collision" type="CollisionShape2D" parent="BulletDetect"]
 
 [node name="GunTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="Explosion" type="AnimatedSprite2D" parent="."]
 visible = false

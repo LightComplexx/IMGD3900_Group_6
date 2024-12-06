@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://yy85f4bco5o6"]
+
+[ext_resource type="PackedScene" uid="uid://bf50puw5bv6fj" path="res://scenes/base_classes/bullet.tscn" id="1_ittxw"]
+[ext_resource type="Script" path="res://scripts/base_classes/missile.gd" id="2_jwf14"]
+[ext_resource type="Texture2D" uid="uid://cqphd6nmnhtkv" path="res://sprites/bullets/grey_tankbullet.png" id="2_lsvre"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_puhxi"]
+size = Vector2(37, 16)
+
+[node name="Bullet" instance=ExtResource("1_ittxw")]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("2_jwf14")
+speed = 600
+steer_force = 25
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_lsvre")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_puhxi")

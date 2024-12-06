@@ -1,6 +1,8 @@
 extends Node2D
 
-@export var enemy_scene: PackedScene
+# 0 = tank enemy
+# 1 = jet enemy
+@export var enemy_scene: Array[PackedScene] = []
 
 var enemy_count
 var enemy_layout: Array[int] = []
@@ -8,7 +10,7 @@ var enemy_layout: Array[int] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	enemy_layout = [1, 1, 2, 3, 3, 4, 4, 4, 5, 6]
+	enemy_layout = [1, 1, 2, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10]
 	set_camera_limits()
 	add_enemies()
 	enemy_count = get_tree().get_nodes_in_group("Enemy").size()
@@ -30,7 +32,13 @@ func set_camera_limits():
 func add_enemies():
 	for i in range(enemy_layout[Globals.enemy_level]):
 		# Create a new instance of the Enemy scene
-		var enemy = enemy_scene.instantiate()
+		var select
+		if Globals.enemy_level > 0 and Globals.enemy_level%2 == 0 and i%2 == 0:
+			select = 1
+		else:
+			select = 0
+		
+		var enemy = enemy_scene[select].instantiate()
 		
 		# Choose random locations for Enemy to patrol
 		enemy.position_markers.append(Vector2(randi_range(60, 4400), randi_range(60, 1600)))
@@ -38,7 +46,7 @@ func add_enemies():
 		enemy.position_markers.append(Vector2(randi_range(60, 4400), randi_range(60, 1600)))
 		
 		# Set enemy variables if needed
-		enemy.max_health = 100 + (5 * Globals.enemy_level%2)
+		enemy.max_health = 100 + (10 * Globals.enemy_level%2)
 		
 		# Spawn the mob by adding it to the Main scene.
 		add_child(enemy)
@@ -59,10 +67,10 @@ func set_player_stats():
 	$Player.max_rotation_speed = Globals.player_stats["rotate_speed"]
 
 
-func _on_Tank_shoot(bullet, _position, _direction):
+func _on_Tank_shoot(bullet, _position, _direction, _target = null):
 	var b = bullet.instantiate()
 	add_child(b)
-	b.start(_position, _direction)
+	b.start(_position, _direction, _target)
 
 
 func _on_player_dead() -> void:

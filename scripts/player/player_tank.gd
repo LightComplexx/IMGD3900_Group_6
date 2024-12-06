@@ -77,13 +77,13 @@ func control(_delta):
 	
 
 # handles shoot action
-func _on_shoot() -> void:
+func _on_shoot(target = null) -> void:
 	if can_shoot:
 		can_shoot = false
 		$GunTimer.start()
 		var dir = Vector2(1, 0).rotated($Turret.global_rotation)
 		$BulletSound.play()
-		emit_signal("shoot", Bullet, $Turret/Muzzle.global_position, dir)
+		emit_signal("shoot", Bullet, $Turret/Muzzle.global_position, dir, target)
 		
 
 func explode() -> void:

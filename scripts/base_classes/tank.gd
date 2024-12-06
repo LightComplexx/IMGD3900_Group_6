@@ -50,12 +50,12 @@ func explode() -> void:
 	pass
 
 # handles shoot action
-func _on_shoot() -> void:
+func _on_shoot(target = null) -> void:
 	if can_shoot:
 		can_shoot = false
 		$GunTimer.start()
 		var dir = Vector2(1, 0).rotated($Turret.global_rotation)
-		emit_signal("shoot", Bullet, $Turret/Muzzle.global_position, dir)
+		emit_signal("shoot", Bullet, $Turret/Muzzle.global_position, dir, target)
 		
 		#$Turret.translate(Vector2(-10,0)) #turret recoil, value is draft
 		#TODO: Make the turret return at a set rate

@@ -24,11 +24,18 @@ func _on_area_entered(area: Area2D) -> void:
 			var bullet_shape = area.get_node("bullet_collision") as CollisionShape2D
 			if bullet_shape:
 				# Assuming the parent of the Area2D has a take_damage method
-					if area.get_parent().has_method("take_damage"):
-						area.get_parent().take_damage(damage)
-						area.get_parent().get_node("DamagedSound").play()
-						explode()
-	
+				if area.get_parent().has_method("take_damage"):
+					area.get_parent().take_damage(damage)
+					area.get_parent().get_node("DamagedSound").play()
+					explode()
+	if area.name == "BodyDetection" and area.get_parent().is_in_group("Enemy"):
+		if area.has_node("detection_shape"):
+			var bullet_shape = area.get_node("detection_shape") as CollisionPolygon2D
+			if bullet_shape:
+				if area.get_parent().has_method("take_damage"):
+					area.get_parent().take_damage(damage)
+					area.get_parent().get_node("DamagedSound").play()
+					explode()
 
 func _on_update_damage(dmg) -> void:
 	damage += dmg

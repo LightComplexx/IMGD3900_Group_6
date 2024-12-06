@@ -193,6 +193,7 @@ scale = Vector2(0.8, 0.8)
 texture = ExtResource("10_3o8in")
 
 [node name="atk_button" type="Button" parent="UpgradeWindow"]
+layout_mode = 0
 offset_left = 121.0
 offset_top = 422.4
 offset_right = 448.0
@@ -226,6 +227,7 @@ theme_override_font_sizes/font_size = 20
 text = "3"
 
 [node name="fire_button" type="Button" parent="UpgradeWindow"]
+layout_mode = 0
 offset_left = 121.0
 offset_top = 494.4
 offset_right = 448.0
@@ -257,6 +259,7 @@ theme_override_font_sizes/font_size = 20
 text = ".01"
 
 [node name="spd_button" type="Button" parent="UpgradeWindow"]
+layout_mode = 0
 offset_left = 121.0
 offset_top = 566.4
 offset_right = 448.0
