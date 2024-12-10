@@ -58,19 +58,20 @@ func update_player_stats(atk_num, hp_num, spd_num):
 
 
 func _on_confirm_pressed() -> void:
-	if $UpgradeWindow/atk_button.button_pressed:
-		Globals.player_stats["gun_damage"] += 5
-	if $UpgradeWindow/fire_button.button_pressed:
-		Globals.player_stats["gun_cooldown"] -= 0.01
-	if $UpgradeWindow/spd_button.button_pressed:
-		Globals.player_stats["gun_speed"] += 25
-		
+	$UpgradeWindow/Confirm.set_deferred("disabled", true)
+	
 	if $UpgradeWindow/hp_button.button_pressed:
 		Globals.player_stats["hp"] += 10
+	if $UpgradeWindow/atk_button.button_pressed:
+		Globals.player_stats["gun_damage"] += 5
 	if $UpgradeWindow/move_button.button_pressed:
 		Globals.player_stats["tank_speed"] += 20
-	if $UpgradeWindow/rotate_button.button_pressed:
-		Globals.player_stats["rotate_speed"] += 0.2
+	#if $UpgradeWindow/fire_button.button_pressed:
+		#Globals.player_stats["gun_cooldown"] -= 0.01
+	#if $UpgradeWindow/spd_button.button_pressed:
+		#Globals.player_stats["gun_speed"] += 25
+	#if $UpgradeWindow/rotate_button.button_pressed:
+		#Globals.player_stats["rotate_speed"] += 0.2
 	
 	update_player_stats(Globals.player_stats["gun_damage"], Globals.player_stats["hp"], Globals.player_stats["tank_speed"])
 	upgrades_selected = true

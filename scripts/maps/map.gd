@@ -55,11 +55,9 @@ func add_enemies():
 	print(Globals.enemy_level)
 
 func set_player_stats():
-	$Player.update_damage(Globals.player_stats["gun_damage"])
-	$Player.gun_cooldown = Globals.player_stats["gun_cooldown"]
-	$Player.update_damage(Globals.player_stats["gun_speed"])
 	$Player.max_health = Globals.player_stats["hp"]
 	$Player.health = $Player.max_health
+	$Player.gun_cooldown = Globals.player_stats["gun_cooldown"]
 	$Player.max_speed = Globals.player_stats["tank_speed"]
 	$Player.max_rotation_speed = Globals.player_stats["rotate_speed"]
 
@@ -80,6 +78,7 @@ func _on_enemy_dead():
 	
 	if enemy_count == 0:
 		$Player.can_control = false
+		$Player/BulletDetect/bullet_collision.set_deferred("disabled", true)
 		$Player/HUD/Message.show()
 		$ProgessTimer.start()
 
