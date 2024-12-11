@@ -6,6 +6,11 @@ var base_gun = preload("res://sprites/tank_guns/base_gun.png")
 var big_gun = preload("res://sprites/tank_guns/big_gun.png")
 var gun_texture = base_gun
 var can_control
+var acceleration = 200.0  # Speed increase per second
+var deceleration = 200.0  # Speed decrease per second
+var brake_force = 300.0   # Additional speed decrease per second
+var current_speed = 0.0
+
 
 func _ready() -> void:
 	health = max_health
@@ -27,6 +32,9 @@ func control(_delta):
 	# Check if forward or backward is pressed along with left or right
 	var is_forward_or_backward_pressed = Input.is_action_pressed("move_forward") or Input.is_action_pressed("move_backward")
 	var rot_speed_modifier = 0.5 if is_forward_or_backward_pressed else 1.0
+	
+	# Desired speed based on input
+	var target_speed: float = 0.0
 	
 	# Stop sound if not moving
 	if not Input.is_anything_pressed():
@@ -51,11 +59,11 @@ func control(_delta):
 		if Input.is_action_pressed("move_forward"):
 			if not $MoveSound.playing:
 				$MoveSound.play()
-			velocity = Vector2(max_speed, 0).rotated(rotation)
+			target_speed = max_speed
 		if Input.is_action_pressed("move_backward"):
 			if not $MoveSound.playing:
 				$MoveSound.play()
-			velocity = Vector2(-max_speed * 0.75, 0).rotated(rotation)
+			target_speed = -max_speed * 0.75
 			
 		# Check shoot button
 		if Input.is_action_pressed("shoot"):
@@ -72,6 +80,23 @@ func control(_delta):
 				gun_texture = base_gun
 				gun_cooldown = 0.25
 				$GunTimer.wait_time = gun_cooldown
+		
+		# Adjust speed towards target speed
+		if (current_speed > 0 and target_speed < 0) or (current_speed < 0 and target_speed > 0):
+			# Apply additional brake force for direction change
+			if current_speed > 0:
+				current_speed = max(current_speed - brake_force * _delta, 0)
+			elif current_speed < 0:
+				current_speed = min(current_speed + brake_force * _delta, 0)
+		else:
+			# Smoothly accelerate or decelerate
+			if current_speed < target_speed:
+				current_speed = min(current_speed + acceleration * _delta, target_speed)
+			elif current_speed > target_speed:
+				current_speed = max(current_speed - deceleration * _delta, target_speed)
+		# Calculate velocity
+		velocity = Vector2(current_speed, 0).rotated(rotation)
+		# Apply Physics
 		move_and_slide()
 		
 	
