@@ -32,13 +32,14 @@ func set_camera_limits():
 	
 
 func add_enemies():
+	var rng = RandomNumberGenerator.new()
 	for i in range(enemy_layout[Globals.enemy_level]):
 		# Create a new instance of the Enemy scene
 		var select
-		if Globals.enemy_level > 0 and i%2 == 0:
-			select = 1
-		else:
+		if Globals.enemy_level > 0 and (rng.randi_range(0, 1)) == 0:
 			select = 0
+		else:
+			select = 1
 		
 		var enemy = enemy_scene[select].instantiate()
 		
