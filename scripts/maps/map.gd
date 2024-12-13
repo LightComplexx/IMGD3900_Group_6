@@ -35,10 +35,10 @@ func add_enemies():
 	for i in range(enemy_layout[Globals.enemy_level]):
 		# Create a new instance of the Enemy scene
 		var select
-		if Globals.enemy_level > 0 and Globals.enemy_level%2 == 0 and i%2 == 0:
+		if Globals.enemy_level > 0 and i%2 == 0:
 			select = 1
 		else:
-			select = 1
+			select = 0
 		
 		var enemy = enemy_scene[select].instantiate()
 		
