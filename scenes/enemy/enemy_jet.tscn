@@ -7,9 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://cldn0ev81032y" path="res://sounds/generic/armor_sound.wav" id="4_ce7vl"]
 [ext_resource type="AudioStream" uid="uid://edhnibbh25ji" path="res://sounds/generic/jet_damage.wav" id="4_d8bt2"]
 [ext_resource type="PackedScene" uid="uid://bdgfouvkixk75" path="res://scenes/ui/enemy_display.tscn" id="7_wx3mj"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1skjk"]
-size = Vector2(20, 12)
+[ext_resource type="AudioStream" uid="uid://o5h8nn6njmxs" path="res://sounds/generic/jet_shoot.wav" id="8_tice0"]
 
 [sub_resource type="Animation" id="Animation_is6n2"]
 resource_name = "shoot_signal"
@@ -51,12 +49,6 @@ texture = ExtResource("2_bht61")
 [node name="Muzzle" parent="Turret" index="0"]
 position = Vector2(3.68, 0)
 
-[node name="BulletDetect" parent="." index="3"]
-visible = false
-
-[node name="bullet_collision" parent="BulletDetect" index="0"]
-shape = SubResource("RectangleShape2D_1skjk")
-
 [node name="ArmorSound" parent="." index="6"]
 stream = ExtResource("4_ce7vl")
 
@@ -83,6 +75,10 @@ libraries = {
 }
 
 [node name="BulletIntervalTimer" type="Timer" parent="." index="12"]
+
+[node name="ShootSound" type="AudioStreamPlayer" parent="." index="13"]
+stream = ExtResource("8_tice0")
+volume_db = -10.0
 
 [connection signal="health_changed" from="." to="EnemyDisplay" method="update_healthbar"]
 [connection signal="body_entered" from="DetectRadius" to="." method="_on_detect_radius_body_entered"]

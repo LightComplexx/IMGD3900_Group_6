@@ -1,6 +1,6 @@
 extends "res://scripts/base_classes/bullet.gd"
 
-var base_gun = preload("res://sprites/tank_guns/base_gun.png")
+var base_gun = preload("res://sprites/tank_guns/single_gunonly_pixel.png")
 var big_gun = preload("res://sprites/tank_guns/big_gun.png")
 
 func _ready() -> void:

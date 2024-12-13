@@ -70,8 +70,10 @@ sprite_frames = SubResource("SpriteFrames_p3udr")
 animation = &"explosion"
 
 [node name="ArmorSound" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
 
 [node name="DamagedSound" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
 
 [connection signal="timeout" from="GunTimer" to="." method="_on_gun_timer_timeout"]
 [connection signal="animation_finished" from="Explosion" to="." method="_on_explosion_animation_finished"]

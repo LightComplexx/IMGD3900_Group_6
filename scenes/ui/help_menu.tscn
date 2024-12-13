@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dgfsajfh3gln2"]
+[gd_scene load_steps=13 format=3 uid="uid://dgfsajfh3gln2"]
 
 [ext_resource type="Script" path="res://scripts/ui/help_menu.gd" id="1_uw3q8"]
 [ext_resource type="Texture2D" uid="uid://duulbgr7uua2k" path="res://sprites/ui/beta_logo.png" id="2_i74rl"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://ixinma6qudcm" path="res://sprites/ui/keyboard_keys/keyboard_space_icon.png" id="8_rs287"]
 [ext_resource type="Texture2D" uid="uid://cyioea30iksh0" path="res://sprites/ui/keyboard_keys/keyboard_j.png" id="8_uwacx"]
 [ext_resource type="Texture2D" uid="uid://bfdm6ga1vstqw" path="res://sprites/ui/keyboard_keys/keyboard_r.png" id="10_vy6sm"]
+[ext_resource type="AudioStream" uid="uid://dc5vofhpgore7" path="res://sounds/generic/soundtrack01.wav" id="12_wsacg"]
 
 [node name="HelpMenu" type="Control"]
 layout_mode = 3
@@ -282,5 +283,9 @@ texture = ExtResource("10_vy6sm")
 position = Vector2(352, 512)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("8_rs287")
+
+[node name="MainTheme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_wsacg")
+volume_db = -10.0
 
 [connection signal="pressed" from="MarginContainer/Back" to="." method="_on_back_pressed"]

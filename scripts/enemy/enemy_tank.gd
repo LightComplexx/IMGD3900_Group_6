@@ -116,6 +116,10 @@ func _on_bullet_interval_timer_timeout() -> void:
 	if bullets_fired < bullets_per_burst and alive and not waiting_for_anim:
 		var dir = Vector2(1, 0).rotated($Turret.global_rotation)
 		emit_signal("shoot", Bullet, $Turret/Muzzle.global_position, dir, null)
+		# quick makeshift turret recoil 
+		$Turret.position += Vector2(-5, 0)
+		await get_tree().create_timer(0.05).timeout
+		$Turret.position = Vector2(0, 0)
 		$ShootSound.play()
 		bullets_fired += 1
 

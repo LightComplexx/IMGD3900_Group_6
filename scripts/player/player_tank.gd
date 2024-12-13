@@ -2,7 +2,7 @@ extends "res://scripts/base_classes/tank.gd"
 
 signal upgrades_done
 
-var base_gun = preload("res://sprites/tank_guns/base_gun.png")
+var base_gun = preload("res://sprites/tank_guns/single_gunonly_pixel.png")
 var big_gun = preload("res://sprites/tank_guns/big_gun.png")
 var gun_texture = base_gun
 var can_control
@@ -110,6 +110,10 @@ func _on_shoot(target = null) -> void:
 		$BulletSound.play()
 		emit_signal("shoot", Bullet, $Turret/Muzzle.global_position, dir, target)
 		
+		# quick makeshift turret recoil 
+		$Turret.position += Vector2(-5, 0)
+		await get_tree().create_timer(0.1).timeout
+		$Turret.position = Vector2(0, 0)
 
 func explode() -> void:
 	emit_signal("dead")

@@ -108,7 +108,7 @@ func _on_bullet_interval_timer_timeout() -> void:
 		# Shoots 2 bullets
 		emit_signal("shoot", Bullet, position1, dir, temp_target)
 		emit_signal("shoot", Bullet, position2, dir, temp_target)
-		# $ShootSound.play()
+		$ShootSound.play()
 		bullets_fired += 1
 
 		# Schedule the next shot if needed

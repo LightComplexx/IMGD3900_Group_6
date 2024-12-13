@@ -128,6 +128,7 @@ color = Color(1, 0.27451, 0.215686, 0.345098)
 
 [node name="ShootSound" type="AudioStreamPlayer" parent="." index="13"]
 stream = ExtResource("7_d0lko")
+volume_db = -10.0
 
 [node name="ArmorSound" parent="." index="14"]
 stream = ExtResource("8_xl577")

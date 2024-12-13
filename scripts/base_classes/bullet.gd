@@ -39,12 +39,22 @@ func seek():
 
 
 func explode():
-	queue_free()
-	
+	target = null
+	velocity = Vector2.ZERO
+	$Sprite2D.hide()
+	$CollisionShape2D.set_deferred("disabled", true)
+	$Explosion.show()
+	$Explosion.play()
+
 
 
 func _on_body_entered(body: Node2D) -> void:
-	explode()
+	if body is CharacterBody2D:
+		if body.has_node("ArmorSound"):
+			body.get_node("ArmorSound").play()
+		explode()
+	else:
+		explode()
 
 func _on_lifetime_timeout() -> void:
 	explode()
@@ -52,3 +62,7 @@ func _on_lifetime_timeout() -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	explode()
+
+
+func _on_explosion_animation_finished() -> void:
+	queue_free()

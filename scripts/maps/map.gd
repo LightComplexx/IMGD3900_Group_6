@@ -10,7 +10,8 @@ var enemy_layout: Array[int] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	enemy_layout = [1, 1, 2, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10]
+	enemy_layout = [1, 1, 2, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, \
+	10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20]
 	set_camera_limits()
 	add_enemies()
 	enemy_count = get_tree().get_nodes_in_group("Enemy").size()
@@ -18,6 +19,7 @@ func _ready() -> void:
 	$Player.upgrades_done.connect(_on_upgrade_timer_timeout)
 	$Player/HUD.update_score(enemy_count)
 	$Player/HUD.update_level(Globals.enemy_level + 1)
+	$MainTheme.play(Globals.song_position)
 
 
 func set_camera_limits():
@@ -36,7 +38,7 @@ func add_enemies():
 		if Globals.enemy_level > 0 and Globals.enemy_level%2 == 0 and i%2 == 0:
 			select = 1
 		else:
-			select = 0
+			select = 1
 		
 		var enemy = enemy_scene[select].instantiate()
 		
@@ -69,6 +71,7 @@ func _on_Tank_shoot(bullet, _position, _direction, _target = null):
 
 
 func _on_player_dead() -> void:
+	Globals.song_position = $MainTheme.get_playback_position() + AudioServer.get_time_since_last_mix()
 	Globals.main_menu()
 
 
@@ -89,4 +92,5 @@ func _on_progress_timer_timeout() -> void:
 
 
 func _on_upgrade_timer_timeout() -> void:
+	Globals.song_position = $MainTheme.get_playback_position() + AudioServer.get_time_since_last_mix()
 	Globals.adv_enemy_level()
